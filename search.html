@@ -1,0 +1,39 @@
+---
+layout: default
+title: Search
+---
+
+<div class="search-page" data-search-json="{{ '/search.json' | relative_url }}">
+
+  <div class="search-hero">
+    <div class="container">
+      <h1 class="search-page-title">Search</h1>
+      <div class="search-input-wrap" role="search" aria-label="Site search">
+        <svg class="search-input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search articles, topics, keywords…"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          aria-label="Search articles"
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="search-results" class="search-results" aria-live="polite" aria-atomic="true">
+      <p class="search-hint">Search across all posts by topic, keyword, or phrase.</p>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ '/assets/js/lunr.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/search.js' | relative_url }}"></script>

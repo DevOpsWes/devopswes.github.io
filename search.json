@@ -1,0 +1,5 @@
+---
+layout: none
+sitemap: false
+---
+[{% for post in site.posts %}{"ref":{{ post.url | jsonify }},"title":{{ post.title | jsonify }},"url":{{ post.url | relative_url | jsonify }},"date":{{ post.date | date: "%b %d, %Y" | jsonify }},"tags":{{ post.tags | join: " " | jsonify }},"excerpt":{{ post.excerpt | strip_html | strip | jsonify }},"content":{{ post.content | strip_html | truncate: 5000 | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
