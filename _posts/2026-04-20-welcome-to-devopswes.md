@@ -1,38 +1,24 @@
 ---
-title: "Welcome to DevOpsWes: Where AI Meets the Future of DevOps"
+title: "Welcome to DevOpsWes — why I finally started writing things down"
 date: 2026-04-20
 tags: [AI, DevOps, Automation]
-excerpt: "A new blog born from years of automating everything that could be automated — and a few things that probably shouldn't have been."
+excerpt: "20 years in IT and I never bothered blogging. Then AI showed up and changed the math."
 ---
 
-After years of building pipelines that deploy at 3am without waking anyone up, writing scripts that outlived the problems they solved, and coaxing LLMs into doing things their creators hadn't imagined — I decided it was time to write some of it down.
+I've been in IT for over 20 years. Started in 2001, fixing printers and managing Citrix environments that nobody fully understood, including the people who built them. Spent the next decade going deeper into virtual desktops, workspace management, and PowerShell scripts that kept breaking in creative new ways.
 
-Welcome to **DevOpsWes**.
+Then somewhere around 2019 I properly crossed over into DevOps — Terraform, Azure Pipelines, containers, the whole thing. And now here in 2026 I work as a DevOps Engineer delivering automated virtual workspace platforms at Nationale-Nederlanden, while trying to make sense of what AI is actually doing to this industry.
 
-## What This Blog Is About
+That last part is why I'm writing this.
 
-This isn't another "intro to Docker" site. You'll find:
+I've never been much of a blogger. Writing felt like work I wasn't being paid for. But the AI thing broke that logic, because everything is moving so fast that the only way I can keep up with what I'm learning is to write it down — and if I'm writing it anyway, I might as well share it.
 
-- **Practical AI integration** — How to wire language models into real workflows, not just chatbots
-- **Battle-tested DevOps patterns** — The pipelines, the monitoring, the painful lessons
-- **Automation that compounds** — Scripts and workflows that save hours every week, forever
-- **Virtual workplace wins** — How to build a distributed team that outperforms a co-located one
+So that's the deal here. I'm a practitioner, not an influencer. I'll write about stuff I've actually tried, problems I've actually hit, and tools I'm actually using. When something doesn't work, I'll say so. When I'm not sure yet, I'll say that too.
 
-## The Philosophy
+**What you'll find here:**
 
-> Automate the ordinary. Amplify the extraordinary.
+AI that goes beyond chatbots — real integrations, agents, and local models that do actual work. DevOps and Azure content from someone who lives in Azure DevOps pipelines daily. Automation, PowerShell, cloud architecture, and virtual desktop environments. The good, the weird, and the occasionally baffling.
 
-Every hour you spend writing a good script is an investment that pays dividends indefinitely. Every manual process is technical debt you're paying interest on.
+If that sounds useful, stick around. There's a lot I want to write about.
 
-But automation isn't the goal — *leverage* is. The goal is to free human attention for the decisions, creativity, and relationships that machines can't replicate.
-
-## What's Coming
-
-In the next few weeks I'll be writing about:
-
-- Running local AI models with Ollama and wiring them into your dev workflow
-- GitHub Actions patterns I use on every project
-- The home-lab setup that runs my entire professional infrastructure
-- Building AI agents that actually do useful work
-
-Subscribe via [RSS](/feed.xml) and I'll see you in the next one.
+[RSS feed here](/feed.xml) if you want to keep up without algorithms deciding what you see.

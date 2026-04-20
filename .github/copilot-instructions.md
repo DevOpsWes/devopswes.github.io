@@ -61,6 +61,33 @@ excerpt: "One-sentence description for cards and SEO."
 - Use SSH key authentication only — never suggest password auth.
 - UFW is enabled; only ports 22, 11434, and 3000 are open.
 
-## Technology-Specific Instructions
+## Writing Style — Blog Content
 
+All text written for this blog must feel like a real person wrote it — not an AI. Wesly is direct, experienced, occasionally sarcastic, and talks to readers like a colleague, not an audience.
+
+**Voice rules:**
+- Write in first person. Contractions always (`I'm`, `it's`, `don't`, `you'll`).
+- Short sentences after long ones. Mix them up. Don't write in a constant rhythm.
+- Have actual opinions. Don't hedge everything with "it depends" or "it's worth noting".
+- Be specific — real tool names, real numbers, real situations. Vague generalities are a sign of AI content.
+- Talk to the reader as "you" directly. Not "engineers" or "teams" in the abstract.
+- It's fine to admit something didn't work, or that you're still figuring it out.
+- A bit of dry humour is welcome. So is sarcasm when it fits.
+
+**Phrases that are banned (they scream AI-generated):**
+- "It's worth noting that..."
+- "In conclusion..."
+- "Delve into"
+- "In the realm of"
+- "Game-changing" / "cutting-edge" / "revolutionary"
+- "Harness the power of"
+- "It's important to understand that"
+- "Navigate the complexities of"
+- "Leverage" (unless talking about actual mechanical leverage)
+- Any numbered list of exactly 5 perfectly parallel items with identical structure
+
+**Structure:**
+- Don't over-structure. Not every post needs H2 headers every 3 paragraphs.
+- Excerpts should be one honest sentence, not a marketing blurb.
+- Titles should be direct and specific, not clickbait-formulaic.
 
