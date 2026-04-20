@@ -16,6 +16,7 @@ This blog is my notebook — ideas I'm testing, lessons from the trenches, and t
 
 - **AI** — Large language models, agents, prompt engineering, local AI with Ollama, and practical applications that actually ship
 - **DevOps** — CI/CD, Kubernetes, infrastructure-as-code, GitHub Actions, GitOps, and platform engineering
+- **Cloud** — Azure, AWS, cloud-native architecture, cost optimisation, and building resilient infrastructure at scale
 - **Automation** — n8n, Python scripts, API integrations, and everything that saves time at scale
 - **Virtual Desktop Environments** — VDI, cloud desktops, remote access solutions, and tools for building secure, high-performance virtual workspaces
 
