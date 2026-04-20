@@ -47,7 +47,25 @@ layout: default
 <section class="posts-section container" aria-labelledby="latest-articles-heading">
   <div class="section-header">
     <h2 id="latest-articles-heading">Latest Articles</h2>
-    <p>Fresh insights from the front lines of AI, DevOps &amp; automation.</p>
+    <div class="home-search-wrap" role="search" aria-label="Search articles">
+      <svg class="search-input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        type="search"
+        id="home-search-input"
+        class="search-input"
+        placeholder="Search articles, topics, keywords…"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-label="Search articles"
+      >
+      <button id="home-search-btn" class="home-search-btn" aria-label="Search">
+        <span aria-hidden="true">&rarr;</span>
+      </button>
+    </div>
   </div>
 
   {% if paginator.posts.size > 0 %}

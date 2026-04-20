@@ -80,3 +80,18 @@
     cards.forEach(function (c) { c.classList.add('visible'); });
   }
 })();
+
+// Homepage search redirect
+(function () {
+  var inp = document.getElementById('home-search-input');
+  var btn = document.getElementById('home-search-btn');
+  if (!inp) return;
+
+  function go() {
+    var q = inp.value.trim();
+    if (q) window.location.href = '/search?q=' + encodeURIComponent(q);
+  }
+
+  inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
+  if (btn) btn.addEventListener('click', go);
+})();

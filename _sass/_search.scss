@@ -160,6 +160,45 @@
   }
 }
 
+// Homepage search bar (in section-header, redirects to /search)
+.home-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 480px;
+  margin-top: $sp-4;
+
+  .search-input-icon {
+    left: $sp-4;
+  }
+
+  .search-input {
+    padding-right: calc(#{$sp-4} + 44px);
+    flex: 1;
+  }
+}
+
+.home-search-btn {
+  position: absolute;
+  right: $sp-2;
+  top: 50%;
+  transform: translateY(-50%);
+  background: $gradient;
+  border: none;
+  border-radius: $r-md;
+  width: 36px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity $t-fast;
+
+  &:hover { opacity: 0.85; }
+}
+
 // Search nav icon button (in header)
 .search-nav-btn {
   appearance: none;
