@@ -3,7 +3,7 @@
 **Live site:** [www.devopswes.com](https://www.devopswes.com)
 
 > *Automate the Ordinary. Amplify the Extraordinary.*  
-> AI · DevOps · Automation · Virtual Workplace
+> AI · DevOps · Automation · Virtual Desktop Environments
 
 ---
 
@@ -29,7 +29,7 @@ GitHub builds and deploys automatically on every push to `main`.
 ---
 title: "Your Post Title"
 date: 2026-01-01
-tags: [AI, DevOps, Automation, Virtual-Workplace]
+tags: [AI, DevOps, Automation, Virtual-Desktop-Environments]
 excerpt: "One sentence that appears in post cards and SEO meta description."
 ---
 ```
@@ -37,7 +37,7 @@ excerpt: "One sentence that appears in post cards and SEO meta description."
 3. Write your content in Markdown below the `---`
 4. Commit and push → site rebuilds in ~1 minute
 
-**Supported tags:** `AI`, `DevOps`, `Automation`, `Virtual-Workplace` (add new ones freely — they auto-appear on `/tags`)
+**Supported tags:** `AI`, `DevOps`, `Automation`, `Virtual-Desktop-Environments` (add new ones freely — they auto-appear on `/tags`)
 
 **Code blocks** use Rouge syntax highlighting:
 

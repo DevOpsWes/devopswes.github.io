@@ -42,7 +42,7 @@ New posts: create `_posts/YYYY-MM-DD-post-title.md` with this front matter:
 ---
 title: "Post Title"
 date: 2026-01-01
-tags: [AI, DevOps, Automation, Virtual-Workplace]
+tags: [AI, DevOps, Automation, Virtual-Desktop-Environments]
 excerpt: "One-sentence description for cards and SEO."
 ---
 ```
