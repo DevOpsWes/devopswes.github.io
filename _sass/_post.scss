@@ -10,9 +10,20 @@
 }
 
 .post-header {
+  position: relative;
   margin-bottom: $sp-12;
   padding-bottom: $sp-8;
-  border-bottom: 1px solid var(--border);
+
+  // Gradient rule instead of a flat border
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, $cyan, $purple, transparent);
+  }
 }
 
 .post-meta {
@@ -45,7 +56,7 @@
 
 // Post body — styles all markdown output
 .post-content {
-  > * + * { margin-top: 1.5rem; }
+  > * + * { margin-top: 1.75rem; }
 
   h2 {
     font-size: 1.6rem;
@@ -58,11 +69,14 @@
   }
 
   h3 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    margin-top: 2.5rem;
-    color: $cyan;
-    [data-theme="light"] & { color: $purple; }
+    margin-top: 2.25rem;
+    color: var(--text);
+    padding-left: $sp-3;
+    border-left: 3px solid $cyan;
+
+    [data-theme="light"] & { border-left-color: $purple; }
   }
 
   h4 {
@@ -72,11 +86,29 @@
   }
 
   p {
-    color: var(--muted);
-    font-size: 1.02rem;
+    color: #c4cdd8;
+    font-size: 1.0625rem;
     line-height: 1.85;
 
     [data-theme="light"] & { color: var(--text); }
+  }
+
+  // Entry paragraph — slightly larger to ease the reader in
+  > p:first-of-type {
+    font-size: 1.125rem;
+    line-height: 1.8;
+  }
+
+  strong {
+    color: var(--text);
+    font-weight: 700;
+    [data-theme="light"] & { color: var(--text); }
+  }
+
+  em {
+    color: #c4cdd8;
+    font-style: italic;
+    [data-theme="light"] & { color: var(--muted); }
   }
 
   a {
@@ -128,13 +160,21 @@
   }
 
   blockquote {
-    border-left: 3px solid $cyan;
-    margin: 2rem 0;
-    padding: $sp-4 $sp-6;
+    border-left: 4px solid $cyan;
+    margin: 2.5rem 0;
+    padding: $sp-4 $sp-6 $sp-4 $sp-8;
     background: var(--card);
     border-radius: 0 $r-md $r-md 0;
+    font-size: 1.05rem;
 
-    p { font-style: italic; margin: 0; }
+    [data-theme="light"] & { border-left-color: $purple; }
+
+    p {
+      font-style: italic;
+      margin: 0;
+      color: var(--text);
+      line-height: 1.8;
+    }
   }
 
   ul {
@@ -144,8 +184,9 @@
     li {
       position: relative;
       padding-left: 1.5rem;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
+      color: #c4cdd8;
+      line-height: 1.75;
+      margin-bottom: 0.65rem;
       [data-theme="light"] & { color: var(--text); }
 
       &::before {
@@ -154,7 +195,7 @@
         left: 0;
         color: $cyan;
         font-size: 0.75em;
-        top: 0.25em;
+        top: 0.3em;
         [data-theme="light"] & { color: $purple; }
       }
     }
@@ -165,8 +206,9 @@
     list-style: decimal;
 
     li {
-      color: var(--muted);
-      margin-bottom: 0.5rem;
+      color: #c4cdd8;
+      line-height: 1.75;
+      margin-bottom: 0.65rem;
       [data-theme="light"] & { color: var(--text); }
     }
   }
@@ -286,3 +328,16 @@
 }
 
 .page-content { @extend .post-content; }
+
+// Reading progress bar (shown only on post pages)
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: $gradient;
+  z-index: 9999;
+  transition: width 80ms linear;
+  pointer-events: none;
+}

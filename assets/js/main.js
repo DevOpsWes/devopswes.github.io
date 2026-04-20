@@ -95,3 +95,27 @@
   inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
   if (btn) btn.addEventListener('click', go);
 })();
+
+// Reading progress bar (post pages only)
+(function () {
+  var bar     = document.getElementById('reading-progress');
+  var content = document.querySelector('.post-content');
+  if (!bar || !content) return;
+
+  function update() {
+    var rect  = content.getBoundingClientRect();
+    var total = content.offsetHeight - window.innerHeight;
+    if (total <= 0) {
+      bar.style.width = '100%';
+      bar.setAttribute('aria-valuenow', '100');
+      return;
+    }
+    var pct = Math.max(0, Math.min(100, (-rect.top / total) * 100));
+    bar.style.width = pct + '%';
+    bar.setAttribute('aria-valuenow', Math.round(pct));
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+})();
