@@ -85,6 +85,7 @@ All text written for this blog must feel like a real person wrote it — not an 
 - "Navigate the complexities of"
 - "Leverage" (unless talking about actual mechanical leverage)
 - Any numbered list of exactly 5 perfectly parallel items with identical structure
+- Em dashes (`—`). Use commas, colons, or just rewrite the sentence.
 
 **Structure:**
 - Don't over-structure. Not every post needs H2 headers every 3 paragraphs.
