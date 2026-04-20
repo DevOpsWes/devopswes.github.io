@@ -27,4 +27,4 @@ If a machine can do it twice, write a script. If a script runs daily, containeri
 
 ## Get in Touch
 
-Found something useful? Have a question? Open an issue on [GitHub](https://github.com/DevOpsWes) or find me wherever engineers gather.
+Found something useful? Have a question? Connect with me on [LinkedIn](https://www.linkedin.com/in/weslyvanstraten/) or open an issue on [GitHub](https://github.com/DevOpsWes).
