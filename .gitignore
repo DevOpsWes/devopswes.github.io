@@ -4,3 +4,29 @@ _site/
 .jekyll-metadata
 vendor/
 Gemfile.lock
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Bundler
+.bundle/
+
+# Editor temp files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# Local dev
+node_modules/
