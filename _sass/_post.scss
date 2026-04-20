@@ -329,6 +329,44 @@
 
 .page-content { @extend .post-content; }
 
+// TL;DR callout — rendered from `tldr:` front matter field
+.post-tldr {
+  display: flex;
+  gap: $sp-4;
+  align-items: flex-start;
+  background: rgba($cyan, 0.05);
+  border: 1px solid rgba($cyan, 0.18);
+  border-left: 4px solid $cyan;
+  border-radius: 0 $r-md $r-md 0;
+  padding: $sp-4 $sp-6;
+  margin-bottom: $sp-8;
+
+  [data-theme="light"] & {
+    background: rgba($purple, 0.04);
+    border-color: rgba($purple, 0.18);
+    border-left-color: $purple;
+  }
+
+  .post-tldr-label {
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: $cyan;
+    flex-shrink: 0;
+    padding-top: 0.25rem;
+    [data-theme="light"] & { color: $purple; }
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+}
+
 // Reading progress bar (shown only on post pages)
 .reading-progress {
   position: fixed;

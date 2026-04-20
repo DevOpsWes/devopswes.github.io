@@ -3,6 +3,7 @@ title: "Welcome to DevOpsWes: why I finally started writing things down"
 date: 2026-04-20
 tags: [AI, DevOps, Automation]
 excerpt: "20 years in IT and I never bothered blogging. Then AI showed up and changed the math."
+tldr: "20 years in IT and I never blogged — writing felt like work I wasn't being paid for. Then AI started moving fast enough that the only way I can keep up is to write things down. I figured I'd share it while I'm at it."
 ---
 
 I've been in IT for over 20 years. Started in 2001, fixing printers and managing Citrix environments that nobody fully understood, including the people who built them. Spent the next decade going deeper into virtual desktops, workspace management, and PowerShell scripts that kept breaking in creative new ways.

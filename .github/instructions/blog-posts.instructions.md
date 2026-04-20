@@ -17,6 +17,7 @@ title: "Your Title Here"
 date: 2026-01-01
 tags: [AI, DevOps, Automation, Virtual-Desktop-Environments, Cloud]
 excerpt: "One honest sentence that describes what this post is actually about."
+tldr: "Two or three sentences. Give away the answer — what happened, what you found, what changed. Readers scanning before committing deserve the actual point, not a teaser."
 ---
 ```
 
@@ -26,6 +27,7 @@ excerpt: "One honest sentence that describes what this post is actually about."
 - `date`: Use `YYYY-MM-DD` format. Set to the actual publish date.
 - `tags`: Use only established tags (see list below). Multi-word tags use hyphens.
 - `excerpt`: One sentence. Honest, not marketing. Readers will see this on the homepage cards and in search results.
+- `tldr`: Two or three sentences rendered as a callout box at the top of the post. Give the reader the actual answer up front — what happened, what you found, what changed. Don't treat it as a second excerpt or a teaser. Scanning readers deserve the real point.
 
 ## Established Tags
 

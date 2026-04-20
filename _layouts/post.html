@@ -29,6 +29,13 @@ layout: default
     {% endif %}
   </header>
 
+  {% if page.tldr %}
+  <aside class="post-tldr" aria-label="Summary">
+    <span class="post-tldr-label">TL;DR</span>
+    <p>{{ page.tldr }}</p>
+  </aside>
+  {% endif %}
+
   <div class="post-content">
     {{ content }}
   </div>

@@ -3,6 +3,7 @@ title: "How I used Copilot to find a VDI bug that left no errors in any log"
 date: 2026-04-15
 tags: [AI, DevOps, Automation, Virtual-Desktop-Environments]
 excerpt: "The issue couldn't be reproduced. The logs showed nothing. No errors, no warnings, no obvious trail. Here's how I found it anyway."
+tldr: "A random Citrix DaaS issue with no errors in any log. I set up a ControlUp trigger to automatically capture 40 minutes of forensic data around each occurrence, then briefed Copilot to cross-reference it against a clean baseline using a deliberate elimination step. The root cause was hiding in an informational event: two Azure auth module versions loaded simultaneously, neither failing. You wouldn't have found it reading logs by hand."
 ---
 
 I want to tell you about the moment I stopped thinking of Copilot as a code assistant and started thinking of it as an investigator.
