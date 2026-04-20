@@ -113,7 +113,7 @@
   background: var(--border);
 }
 
-// Floating code window decoration
+// Hero bot illustration
 .hero-decoration {
   display: flex;
   justify-content: center;
@@ -122,16 +122,15 @@
   @media (max-width: 900px) { display: none; }
 }
 
-.code-window {
-  background: #0d1117;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: $r-lg;
-  box-shadow: $shadow-lg, $shadow-glow;
-  overflow: hidden;
+.hero-bot {
   width: 100%;
-  max-width: 400px;
-  font-family: $font-mono;
-  font-size: 0.78rem;
+  max-width: 380px;
+  height: auto;
+  filter: drop-shadow(0 0 32px rgba(0, 212, 255, 0.18));
+
+  [data-theme="light"] & {
+    filter: drop-shadow(0 0 24px rgba(124, 58, 237, 0.18));
+  }
 }
 
 @keyframes float {

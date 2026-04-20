@@ -34,25 +34,12 @@ layout: default
     </div>
 
     <div class="hero-decoration" aria-hidden="true">
-      <div class="code-window floating">
-        <div class="code-window-header">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-          <span class="code-window-title">deploy.yml</span>
-        </div>
-        <pre class="code-window-body"><code><span class="ck">name</span><span class="cp">:</span> Deploy to Production
-<span class="ck">on</span><span class="cp">:</span>
-  <span class="ck">push</span><span class="cp">:</span>
-    <span class="ck">branches</span><span class="cp">:</span> <span class="cb">[main]</span>
-<span class="ck">jobs</span><span class="cp">:</span>
-  <span class="ck">deploy</span><span class="cp">:</span>
-    <span class="ck">runs-on</span><span class="cp">:</span> <span class="cs">ubuntu-latest</span>
-    <span class="ck">steps</span><span class="cp">:</span>
-      <span class="cp">-</span> <span class="ck">uses</span><span class="cp">:</span> <span class="cs">actions/checkout@v4</span>
-      <span class="cp">-</span> <span class="ck">name</span><span class="cp">:</span> <span class="cs">Ship it! 🚀</span>
-        <span class="ck">run</span><span class="cp">:</span> <span class="cs">make deploy</span></code></pre>
-      </div>
+      <img class="hero-bot floating"
+           src="{{ '/assets/images/hero-bot.svg' | relative_url }}"
+           alt=""
+           width="380"
+           height="450">
+    </div>
     </div>
   </div>
 </section>
