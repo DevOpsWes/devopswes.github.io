@@ -20,9 +20,45 @@ All content written for this blog must feel like a real person wrote it. Wesly i
 
 ## What Wesly Writes About (for context)
 
-Wesly van Straten is a DevOps Engineer at Nationale-Nederlanden in The Netherlands. Career spans 20+ years starting in 2001: helpdesk, Citrix/VDI specialist at Fujitsu (Tech Lead), PowerShell automation at RIVM/Detron, DevOps at RawWorks (Docker, Terraform, Ansible, AWS), and now VDI/DaaS platform engineering with Azure DevOps, Terraform, Citrix Cloud, PowerShell.
+Wesly van Straten is a DevOps Engineer at Nationale-Nederlanden in The Netherlands. Career spans 20+ years starting in 2001: helpdesk, Citrix/VDI specialist at Fujitsu (Tech Lead), PowerShell automation at RIVM/Detron, DevOps at RawWorks (Docker, Terraform, Ansible, AWS), and now VDI/DaaS platform engineering at Nationale-Nederlanden's Virtual Workspace Platform team.
 
 The blog is about navigating the AI transformation of DevOps — sharing what Wesly is actually using, building, and learning, not trend pieces.
+
+## Wesly's Primary Toolset
+
+When writing posts, references to tools must be accurate and consistent with the actual stack:
+
+**Daily work (current role):**
+- Azure DevOps, Terraform, PowerShell, Git
+- Citrix Cloud DaaS (virtual desktop platform)
+- FSLogix (Windows profile management for VDI)
+- ControlUp (VDI session monitoring, trigger automation, and forensic data capture)
+
+**AI tools actively used:**
+- GitHub Copilot in VS Code — used both for code and for data analysis / investigation tasks (see below)
+- Ollama — local LLM hosting, used for infrastructure experiments
+
+**Historical stack (fine to reference in context):**
+- Docker, Ansible, Packer, Python, AWS (RawWorks era)
+- Ivanti workspace management, Windows PowerShell automation (RIVM/Detron era)
+
+## Copilot as an Investigation Tool
+
+A key blog theme: GitHub Copilot in VS Code is used as a **data analyst and investigator**, not just a code assistant. This is an established narrative and should stay consistent across posts.
+
+The approach demonstrated in the ControlUp post:
+1. Collect forensic data automatically (don't rely on manual capture after the fact)
+2. Always capture a **clean baseline** alongside the broken state — differences become obvious
+3. Write a **structured investigation brief**, not a vague prompt: specify the event, the datasets, and explicitly ask for an elimination pass (rule out causes using available data before chasing them)
+4. Let Copilot cross-reference everything, including **informational events** — root causes don't always generate errors; they can hide in informational log entries, especially in XML event data
+
+This methodology may recur in future posts. When referencing it, keep the framing consistent: the value is in how you *brief* the AI, not just that you used AI.
+
+## Recurring Insights to Keep Consistent
+
+- **"Look at informational events."** A specific, hard-won lesson: filtering only for errors and warnings misses root causes that only appear in informational events (often buried in XML data). This is a tip Wesly gives to readers and should be referenced consistently.
+- **Automatic data capture beats manual.** Design monitoring triggers to capture data at the moment of the event — not after the fact when the window is gone.
+- **Elimination-first debugging.** When investigating intermittent issues, the goal is to discard suspects fast, not accumulate more. Document this framing consistently.
 
 ## Banned Phrases
 
