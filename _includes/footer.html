@@ -1,0 +1,34 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner container">
+    <div class="footer-brand">
+      <a href="{{ '/' | relative_url }}" class="site-logo footer-logo" aria-label="{{ site.title }} home">
+        <span class="logo-bracket" aria-hidden="true">&lt;</span><span class="logo-name">DevOpsWes</span><span class="logo-bracket" aria-hidden="true">/&gt;</span>
+      </a>
+      <p class="footer-tagline">{{ site.tagline }}</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <div class="footer-col">
+        <h3 class="footer-heading">Topics</h3>
+        <ul role="list">
+          <li><a href="{{ '/tags#AI' | relative_url }}">AI</a></li>
+          <li><a href="{{ '/tags#DevOps' | relative_url }}">DevOps</a></li>
+          <li><a href="{{ '/tags#Automation' | relative_url }}">Automation</a></li>
+          <li><a href="{{ '/tags#Virtual-Workplace' | relative_url }}">Virtual Workplace</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Site</h3>
+        <ul role="list">
+          <li><a href="{{ '/about' | relative_url }}">About</a></li>
+          <li><a href="{{ '/feed.xml' | relative_url }}">RSS Feed</a></li>
+          <li><a href="{{ '/tags' | relative_url }}">All Tags</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="container">&copy; {{ 'now' | date: '%Y' }} DevOpsWes &middot; Built with Jekyll &middot; Hosted on GitHub Pages</p>
+  </div>
+</footer>

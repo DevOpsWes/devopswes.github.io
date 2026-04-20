@@ -1,0 +1,121 @@
+// =============================================================================
+// CSS CUSTOM PROPERTIES & RESET
+// =============================================================================
+
+:root {
+  --bg:           #{$dark-bg};
+  --bg-alt:       #{$dark-bg-alt};
+  --card:         #{$dark-card};
+  --card-hover:   #{$dark-card-hover};
+  --text:         #{$dark-text};
+  --muted:        #{$dark-muted};
+  --faint:        #{$dark-faint};
+  --border:       #{$dark-border};
+  --border-acc:   #{$dark-border-acc};
+  --header-bg:    rgba(8, 12, 20, 0.85);
+}
+
+[data-theme="light"] {
+  --bg:           #{$light-bg};
+  --bg-alt:       #{$light-bg-alt};
+  --card:         #{$light-card};
+  --card-hover:   #{$light-card-hover};
+  --text:         #{$light-text};
+  --muted:        #{$light-muted};
+  --faint:        #{$light-faint};
+  --border:       #{$light-border};
+  --border-acc:   #{$light-border-acc};
+  --header-bg:    rgba(248, 250, 252, 0.85);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: $font-sans;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color $t-normal, color $t-normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  flex: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--text);
+}
+
+a {
+  color: $cyan;
+  text-decoration: none;
+  transition: color $t-fast;
+
+  &:hover { color: lighten($cyan, 12%); }
+  &:focus-visible {
+    outline: 2px solid $cyan;
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+}
+
+img { max-width: 100%; height: auto; }
+ul, ol { list-style: none; }
+
+// Skip link
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: $cyan;
+  color: $dark-bg;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: $r-sm;
+  z-index: 9999;
+
+  &:focus { top: 1rem; }
+}
+
+// Utility: gradient text
+.gradient-text {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Container
+.container {
+  max-width: $max-w;
+  margin: 0 auto;
+  padding: 0 $sp-6;
+
+  @media (max-width: 640px) { padding: 0 $sp-4; }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

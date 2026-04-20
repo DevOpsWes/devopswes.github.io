@@ -1,0 +1,222 @@
+// =============================================================================
+// POST CARDS GRID
+// =============================================================================
+
+.posts-section {
+  padding: $sp-16 0 $sp-24;
+
+  @media (max-width: 640px) { padding: $sp-8 0 $sp-16; }
+}
+
+.section-header {
+  margin-bottom: $sp-12;
+
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: $sp-3;
+  }
+
+  p {
+    color: var(--muted);
+    font-size: 1rem;
+  }
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $sp-6;
+  margin-bottom: $sp-12;
+
+  @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 640px)  { grid-template-columns: 1fr; }
+}
+
+// Card
+.post-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: $r-lg;
+  padding: $sp-6;
+  display: flex;
+  flex-direction: column;
+  gap: $sp-4;
+  transition: transform $t-normal, box-shadow $t-normal, border-color $t-normal;
+  opacity: 0;
+  transform: translateY(16px);
+
+  // Revealed by JS; also handle no-JS / reduced-motion
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:hover, &:focus-within {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg, 0 0 0 1px var(--border-acc);
+    border-color: var(--border-acc);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+    transition: border-color $t-fast;
+  }
+}
+
+.post-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $sp-2;
+  flex-wrap: wrap;
+}
+
+// Tags
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $sp-1;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: $cyan;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  transition: background $t-fast, border-color $t-fast;
+
+  [data-theme="light"] & {
+    background: rgba(124, 58, 237, 0.08);
+    border-color: rgba(124, 58, 237, 0.2);
+    color: $purple;
+  }
+
+  &:hover, &:focus-visible {
+    background: rgba(0, 212, 255, 0.18);
+    border-color: rgba(0, 212, 255, 0.4);
+    color: $cyan;
+
+    [data-theme="light"] & {
+      background: rgba(124, 58, 237, 0.15);
+      border-color: rgba(124, 58, 237, 0.4);
+      color: $purple;
+    }
+  }
+}
+
+.post-date {
+  font-size: 0.78rem;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+.post-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  flex: 1;
+
+  a {
+    color: var(--text);
+    text-decoration: none;
+
+    &:hover, &:focus-visible {
+      color: $cyan;
+      [data-theme="light"] & { color: $purple; }
+    }
+  }
+}
+
+.post-card-excerpt {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  flex: 1;
+}
+
+.post-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $sp-2;
+  margin-top: auto;
+  padding-top: $sp-4;
+  border-top: 1px solid var(--border);
+}
+
+.read-more {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: $cyan;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: $sp-1;
+  transition: gap $t-fast;
+
+  [data-theme="light"] & { color: $purple; }
+
+  &:hover { gap: $sp-2; }
+}
+
+.read-time {
+  font-size: 0.75rem;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+.empty-state {
+  text-align: center;
+  padding: $sp-16 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+// Pagination
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $sp-4;
+  padding-top: $sp-8;
+}
+
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: $sp-2 $sp-6;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: $r-md;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: border-color $t-fast, background $t-fast;
+
+  &:hover:not(.disabled) {
+    border-color: var(--border-acc);
+    background: var(--card-hover);
+    color: $cyan;
+    [data-theme="light"] & { color: $purple; }
+  }
+
+  &.disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+
+.pagination-info {
+  color: var(--muted);
+  font-size: 0.85rem;
+}

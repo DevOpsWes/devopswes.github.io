@@ -1,0 +1,198 @@
+// =============================================================================
+// STICKY FROSTED-GLASS HEADER
+// =============================================================================
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: $header-h;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow $t-normal;
+
+  // Glassmorphism with solid fallback
+  @supports (backdrop-filter: blur(12px)) {
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+  }
+
+  &.scrolled {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.nav-container {
+  max-width: $max-w;
+  margin: 0 auto;
+  padding: 0 $sp-6;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $sp-6;
+
+  @media (max-width: 640px) { padding: 0 $sp-4; }
+}
+
+// Logo
+.site-logo {
+  display: flex;
+  align-items: center;
+  color: var(--text);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.4px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &:hover, &:focus-visible {
+    color: var(--text);
+    .logo-bracket { color: lighten($cyan, 10%); }
+  }
+}
+
+.logo-bracket {
+  color: $cyan;
+  font-family: $font-mono;
+  font-weight: 500;
+}
+.logo-name { color: var(--text); }
+
+// Desktop nav links
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: $sp-8;
+
+  @media (max-width: 768px) { display: none; }
+}
+
+.nav-link {
+  position: relative;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color $t-fast;
+  padding-bottom: 2px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: $gradient;
+    border-radius: 1px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform $t-fast;
+  }
+
+  &:hover, &.active {
+    color: var(--text);
+    &::after { transform: scaleX(1); }
+  }
+
+  &.active { color: $cyan; }
+}
+
+// Nav action buttons
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: $sp-2;
+}
+
+.theme-toggle {
+  appearance: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: $r-md;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--muted);
+  transition: color $t-fast, border-color $t-fast, background $t-fast;
+  flex-shrink: 0;
+
+  .icon { width: 18px; height: 18px; }
+
+  // Dark mode: show sun (to switch to light)
+  .icon-sun  { display: block; }
+  .icon-moon { display: none; }
+
+  [data-theme="light"] & {
+    .icon-sun  { display: none; }
+    .icon-moon { display: block; }
+  }
+
+  &:hover, &:focus-visible {
+    color: $cyan;
+    border-color: var(--border-acc);
+    background: var(--card-hover);
+  }
+}
+
+// Hamburger
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $sp-2;
+  width: 40px;
+  height: 40px;
+  border-radius: $r-sm;
+
+  span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--muted);
+    border-radius: 1px;
+    transition: all $t-fast;
+  }
+
+  &:hover span { background: var(--text); }
+
+  &[aria-expanded="true"] {
+    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+
+  @media (max-width: 768px) { display: flex; }
+}
+
+// Mobile nav drawer
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+
+  &[hidden] { display: none; }
+}
+
+.mobile-nav-link {
+  padding: $sp-4 $sp-6;
+  color: var(--muted);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+
+  &:last-child { border-bottom: none; }
+  &:hover, &:focus-visible { color: $cyan; background: var(--card); }
+
+  @media (max-width: 640px) { padding: $sp-4; }
+}

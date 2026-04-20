@@ -1,0 +1,55 @@
+title: DevOpsWes
+tagline: "Automate the Ordinary. Amplify the Extraordinary."
+description: "Actionable insights on AI, DevOps, automation, and virtual workplace solutions — from a practitioner who ships."
+url: "https://www.devopswes.com"
+baseurl: ""
+logo: /assets/images/favicon.svg
+
+author:
+  name: Wes
+
+twitter:
+  username: devopswes
+  card: summary_large_image
+
+# GitHub Pages plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+
+# Pagination
+paginate: 6
+paginate_path: "/page:num/"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+# Sass
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .gitignore
+  - vendor
+
+# Post defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: Wes

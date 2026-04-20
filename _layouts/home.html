@@ -1,0 +1,94 @@
+---
+layout: default
+---
+
+<section class="hero" aria-label="Site introduction">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="container hero-container">
+    <div class="hero-content">
+      <div class="hero-badge">🚀 AI &middot; DevOps &middot; Automation &middot; Virtual Workplace</div>
+      <h1 class="hero-title">
+        Automate the <span class="gradient-text">Ordinary</span>.<br>
+        Amplify the <span class="gradient-text">Extraordinary</span>.
+      </h1>
+      <p class="hero-subtitle">
+        Practical insights, battle-tested strategies, and cutting-edge techniques
+        for engineers who build, automate, and lead in the age of AI.
+      </p>
+      <div class="hero-stats" aria-label="Blog statistics">
+        <div class="stat">
+          <span class="stat-number">{{ site.posts | size }}</span>
+          <span class="stat-label">Articles</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-number">4</span>
+          <span class="stat-label">Topics</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-number">&infin;</span>
+          <span class="stat-label">Ideas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-decoration" aria-hidden="true">
+      <div class="code-window floating">
+        <div class="code-window-header">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="code-window-title">deploy.yml</span>
+        </div>
+        <pre class="code-window-body"><code><span class="ck">name</span><span class="cp">:</span> Deploy to Production
+<span class="ck">on</span><span class="cp">:</span>
+  <span class="ck">push</span><span class="cp">:</span>
+    <span class="ck">branches</span><span class="cp">:</span> <span class="cb">[main]</span>
+<span class="ck">jobs</span><span class="cp">:</span>
+  <span class="ck">deploy</span><span class="cp">:</span>
+    <span class="ck">runs-on</span><span class="cp">:</span> <span class="cs">ubuntu-latest</span>
+    <span class="ck">steps</span><span class="cp">:</span>
+      <span class="cp">-</span> <span class="ck">uses</span><span class="cp">:</span> <span class="cs">actions/checkout@v4</span>
+      <span class="cp">-</span> <span class="ck">name</span><span class="cp">:</span> <span class="cs">Ship it! 🚀</span>
+        <span class="ck">run</span><span class="cp">:</span> <span class="cs">make deploy</span></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="posts-section container" aria-labelledby="latest-articles-heading">
+  <div class="section-header">
+    <h2 id="latest-articles-heading">Latest Articles</h2>
+    <p>Fresh insights from the front lines of AI, DevOps &amp; automation.</p>
+  </div>
+
+  {% if paginator.posts.size > 0 %}
+  <div class="posts-grid">
+    {% for post in paginator.posts %}
+      {% include post-card.html post=post %}
+    {% endfor %}
+  </div>
+
+  {% if paginator.total_pages > 1 %}
+  <nav class="pagination" aria-label="Page navigation">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-btn" rel="prev">&larr; Newer</a>
+    {% else %}
+      <span class="pagination-btn disabled" aria-disabled="true">&larr; Newer</span>
+    {% endif %}
+    <span class="pagination-info">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-btn" rel="next">Older &rarr;</a>
+    {% else %}
+      <span class="pagination-btn disabled" aria-disabled="true">Older &rarr;</span>
+    {% endif %}
+  </nav>
+  {% endif %}
+
+  {% else %}
+  <div class="empty-state">
+    <p>No articles yet. Check back soon — ideas are brewing. ☕</p>
+  </div>
+  {% endif %}
+</section>

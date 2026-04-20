@@ -1,0 +1,74 @@
+// =============================================================================
+// DESIGN TOKENS
+// =============================================================================
+
+// Dark theme palette
+$dark-bg:          #080c14;
+$dark-bg-alt:      #0d1220;
+$dark-card:        #111827;
+$dark-card-hover:  #1a2235;
+$dark-border:      rgba(255, 255, 255, 0.06);
+$dark-border-acc:  rgba(0, 212, 255, 0.25);
+
+// Light theme palette
+$light-bg:         #f8fafc;
+$light-bg-alt:     #f1f5f9;
+$light-card:       #ffffff;
+$light-card-hover: #f8fafc;
+$light-border:     rgba(0, 0, 0, 0.08);
+$light-border-acc: rgba(124, 58, 237, 0.25);
+
+// Brand accents
+$cyan:    #00d4ff;
+$purple:  #7c3aed;
+$green:   #10b981;
+$yellow:  #f59e0b;
+$red:     #ef4444;
+
+// Text
+$dark-text:   #e2e8f0;
+$dark-muted:  #94a3b8;
+$dark-faint:  #64748b;
+$light-text:  #0f172a;
+$light-muted: #475569;
+$light-faint: #94a3b8;
+
+// Gradient
+$gradient: linear-gradient(135deg, #{$cyan}, #{$purple});
+
+// Typography
+$font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+// Layout
+$max-w:      1200px;
+$content-w:  740px;
+$header-h:   64px;
+
+// Spacing
+$sp-1: 0.25rem;
+$sp-2: 0.5rem;
+$sp-3: 0.75rem;
+$sp-4: 1rem;
+$sp-6: 1.5rem;
+$sp-8: 2rem;
+$sp-12: 3rem;
+$sp-16: 4rem;
+$sp-24: 6rem;
+
+// Radii
+$r-sm: 6px;
+$r-md: 12px;
+$r-lg: 16px;
+$r-xl: 24px;
+
+// Transitions
+$t-fast:   0.15s ease;
+$t-normal: 0.25s ease;
+$t-slow:   0.4s ease;
+
+// Shadows
+$shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.3);
+$shadow-md:  0 4px 16px rgba(0, 0, 0, 0.4);
+$shadow-lg:  0 8px 40px rgba(0, 0, 0, 0.5);
+$shadow-glow: 0 0 40px rgba(0, 212, 255, 0.12);

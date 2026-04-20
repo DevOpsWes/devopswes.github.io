@@ -1,0 +1,29 @@
+---
+layout: page
+title: Tags
+permalink: /tags/
+---
+
+{% assign sorted_tags = site.tags | sort %}
+
+<div class="tags-cloud" role="navigation" aria-label="Browse by tag">
+  {% for tag in sorted_tags %}
+    <a href="#{{ tag[0] | uri_escape }}" class="tag-cloud-item">
+      {{ tag[0] }}<span class="tag-count">{{ tag[1].size }}</span>
+    </a>
+  {% endfor %}
+</div>
+
+{% for tag in sorted_tags %}
+<section class="tag-section" id="{{ tag[0] | uri_escape }}" aria-labelledby="tag-{{ tag[0] | uri_escape }}">
+  <h2 class="tag-heading" id="tag-{{ tag[0] | uri_escape }}">{{ tag[0] }}</h2>
+  <div class="posts-list">
+    {% for post in tag[1] %}
+    <article class="post-list-item">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
