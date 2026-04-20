@@ -6,7 +6,8 @@ baseurl: ""
 logo: /assets/images/favicon.svg
 
 author:
-  name: Wes
+  name: Wesly van Straten
+  email: wes.vanstraten@gmail.com
   linkedin: https://www.linkedin.com/in/weslyvanstraten/
 
 twitter:
