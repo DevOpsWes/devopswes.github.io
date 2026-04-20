@@ -22,6 +22,11 @@
     color: var(--muted);
     font-size: 1rem;
   }
+
+  // When the section-header contains a search bar instead of a subtitle
+  &--with-search {
+    margin-bottom: $sp-8;
+  }
 }
 
 .posts-grid {

@@ -162,41 +162,88 @@
 
 // Homepage search bar (in section-header, redirects to /search)
 .home-search-wrap {
-  position: relative;
   display: flex;
   align-items: center;
-  max-width: 480px;
-  margin-top: $sp-4;
+  margin-top: $sp-6;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: $r-xl;
+  padding: $sp-2;
+  gap: $sp-1;
+  box-shadow: $shadow-sm;
+  transition: border-color $t-fast, box-shadow $t-fast;
 
-  .search-input-icon {
-    left: $sp-4;
+  &:focus-within {
+    border-color: var(--border-acc);
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.08), $shadow-sm;
+
+    [data-theme="light"] & {
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.07), $shadow-sm;
+    }
   }
 
+  // Icon sits inline inside the wrapper
+  .search-input-icon {
+    position: static;
+    transform: none;
+    flex-shrink: 0;
+    margin-left: $sp-3;
+    width: 18px;
+    height: 18px;
+    color: var(--faint);
+  }
+
+  // Input is borderless — the wrapper provides the visual container
   .search-input {
-    padding-right: calc(#{$sp-4} + 44px);
     flex: 1;
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    padding: $sp-3 $sp-2;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      border-color: transparent;
+    }
   }
 }
 
 .home-search-btn {
-  position: absolute;
-  right: $sp-2;
-  top: 50%;
-  transform: translateY(-50%);
-  background: $gradient;
-  border: none;
-  border-radius: $r-md;
-  width: 36px;
-  height: 32px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: $sp-2;
+  background: $gradient;
+  border: none;
+  border-radius: $r-lg;
+  padding: 0 $sp-6;
+  height: 44px;
   color: #fff;
-  font-size: 1rem;
+  font-family: $font-sans;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
   cursor: pointer;
-  transition: opacity $t-fast;
+  white-space: nowrap;
+  transition: opacity $t-fast, transform $t-fast;
 
-  &:hover { opacity: 0.85; }
+  &:hover, &:focus-visible {
+    opacity: 0.88;
+    transform: translateX(1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $cyan;
+    outline-offset: 2px;
+  }
+
+  // Collapse to icon-only on very small screens
+  @media (max-width: 420px) {
+    padding: 0 $sp-4;
+    .btn-label { display: none; }
+  }
 }
 
 // Search nav icon button (in header)
