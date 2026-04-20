@@ -54,18 +54,6 @@ Practical content across the five topics that keep me busy every day:
 
 No fluff. No hype. Just real insights from an engineer in the trenches.
 
----
-
-## Credentials
-
-- 🎓 MBO+, IT University — Scutos (1991–1995)
-- 📜 MCSA 2000 & 2003
-- 📜 MCP — Exchange 2000
-- 📜 Modern Data Warehouse Analytics in Microsoft Azure
-- 📜 Introduction to Data Engineering
-
----
-
 ## Get in Touch
 
 Found something useful? Have a question or want to connect?
