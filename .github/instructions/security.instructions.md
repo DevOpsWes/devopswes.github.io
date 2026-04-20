@@ -20,15 +20,28 @@ applyTo: "**"
 
 A CSP meta tag is set in `_includes/head.html`. Do not remove or weaken it.
 
-The `script-src` directive uses a SHA-256 hash (`'sha256-c91LdYh4SCeRO4lHYKcPwCoc+AaicvNulNvCapKjy8Y='`) to allow the inline theme-flash prevention script without requiring `'unsafe-inline'`. If the inline script in `head.html` is ever modified, the hash must be recomputed and updated:
+The `script-src` directive uses two SHA-256 hashes to allow the inline theme-flash prevention script without requiring `'unsafe-inline'`. Two hashes are needed because `git config core.autocrlf=true` on Windows means the file has LF line endings in the git object (served by GitHub Pages) but CRLF when checked out locally — and CSP hashes are computed over the exact bytes the browser receives.
+
+- `sha256-uflw6T8MZO7JuxU6BqdsHHqg/Alzl0rtcykKZ/0cp0w=` — LF line endings (GitHub Pages / production)
+- `sha256-3RFK37vAcdEOT89DFY6M0XMP/h02zg0vhGsf1yJ4K1g=` — CRLF line endings (local `jekyll serve` on Windows)
+
+If the inline script in `head.html` is ever modified, both hashes must be recomputed:
 
 ```powershell
-# Recompute after editing the inline script body in head.html
-$scriptBody = "<exact content between <script> and </script> tags>"
-$bytes = [System.Text.Encoding]::UTF8.GetBytes($scriptBody)
-$hash = [System.Security.Cryptography.SHA256]::Create().ComputeHash($bytes)
-[Convert]::ToBase64String($hash)
+# Run from the repo root after saving head.html
+$raw   = [System.IO.File]::ReadAllBytes("_includes/head.html")
+$text  = [System.Text.Encoding]::UTF8.GetString($raw)
+$start = $text.IndexOf('<script>') + '<script>'.Length
+$end   = $text.IndexOf('</script>')
+$crlf  = $text.Substring($start, $end - $start)          # local CRLF version
+$lf    = $crlf -replace "`r`n", "`n"                      # git-object LF version
+
+$sha = [System.Security.Cryptography.SHA256]::Create()
+"LF   (GitHub Pages) : sha256-$([Convert]::ToBase64String($sha.ComputeHash([System.Text.Encoding]::UTF8.GetBytes($lf))))"
+"CRLF (local Windows): sha256-$([Convert]::ToBase64String($sha.ComputeHash([System.Text.Encoding]::UTF8.GetBytes($crlf))))"
 ```
+
+Both values go into the `script-src` directive, space-separated.
 
 ## Google Fonts — SRI Note
 
