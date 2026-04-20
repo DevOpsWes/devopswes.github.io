@@ -94,6 +94,7 @@
   }
 
   // Entry paragraph — slightly larger to ease the reader in
+  // (direct-child > combinator naturally skips the <p> inside .post-tldr)
   > p:first-of-type {
     font-size: 1.125rem;
     line-height: 1.8;
@@ -329,41 +330,40 @@
 
 .page-content { @extend .post-content; }
 
-// TL;DR callout — rendered from `tldr:` front matter field
+// TL;DR callout — embedded in post content via {% include tldr.html text="..." %}
 .post-tldr {
-  display: flex;
-  gap: $sp-4;
-  align-items: flex-start;
-  background: rgba($cyan, 0.05);
-  border: 1px solid rgba($cyan, 0.18);
   border-left: 4px solid $cyan;
   border-radius: 0 $r-md $r-md 0;
-  padding: $sp-4 $sp-6;
+  background: rgba($cyan, 0.1);
+  border: 1px solid rgba($cyan, 0.3);
+  border-left: 4px solid $cyan;
+  padding: $sp-6;
   margin-bottom: $sp-8;
 
   [data-theme="light"] & {
-    background: rgba($purple, 0.04);
-    border-color: rgba($purple, 0.18);
+    background: rgba($purple, 0.07);
+    border-color: rgba($purple, 0.3);
     border-left-color: $purple;
   }
 
   .post-tldr-label {
+    display: inline-block;
     font-family: $font-mono;
-    font-size: 0.68rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: $cyan;
-    flex-shrink: 0;
-    padding-top: 0.25rem;
+    margin-bottom: $sp-2;
     [data-theme="light"] & { color: $purple; }
   }
 
-  p {
+  .post-tldr-text {
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 0.975rem;
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.75;
+    font-style: italic;
   }
 }
 
