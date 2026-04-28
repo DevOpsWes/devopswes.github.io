@@ -5,6 +5,16 @@ applyTo: "**/*.yml,**/*.html,**/*.scss,**/*.js,Gemfile,_config.yml"
 
 # Jekyll Stack — Build Rules
 
+## Dynamic Values
+
+Always use Liquid expressions instead of hardcoded numbers for any value that can be derived from site content. Examples:
+
+- Post count: `{{ site.posts | size }}` — not a hardcoded number
+- Tag count: `{{ site.tags | size }}` — not a hardcoded number
+- Any count, list length, or aggregate that Jekyll can compute at build time must be dynamic
+
+Never hardcode a value that will silently go stale as content is added.
+
 ## Repository Layout
 
 | Path | Purpose |

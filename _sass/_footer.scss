@@ -1,4 +1,4 @@
-// =============================================================================
+﻿// =============================================================================
 // FOOTER
 // =============================================================================
 
@@ -57,7 +57,7 @@
     text-decoration: none;
     transition: color $t-fast;
 
-    &:hover, &:focus-visible { color: $cyan; }
+    &:hover, &:focus-visible { color: $accent; }
   }
 }
 
@@ -103,22 +103,22 @@
 
   &:hover, &:focus-visible {
     border-color: var(--border-acc);
-    color: $cyan;
-    [data-theme="light"] & { color: $purple; }
+    color: $accent;
+    [data-theme="light"] & { color: $accent-alt; }
   }
 }
 
 .tag-count {
   font-size: 0.75rem;
-  background: rgba(0, 212, 255, 0.12);
-  color: $cyan;
+  background: rgba($accent, 0.12);
+  color: $accent;
   padding: 1px 7px;
   border-radius: 999px;
   font-weight: 700;
 
   [data-theme="light"] & {
-    background: rgba(124, 58, 237, 0.1);
-    color: $purple;
+    background: rgba($accent-alt, 0.1);
+    color: $accent-alt;
   }
 }
 
@@ -131,8 +131,8 @@
   font-size: 1.3rem;
   font-weight: 800;
   margin-bottom: $sp-4;
-  color: $cyan;
-  [data-theme="light"] & { color: $purple; }
+  color: $accent;
+  [data-theme="light"] & { color: $accent-alt; }
 }
 
 .posts-list { display: flex; flex-direction: column; gap: $sp-3; }
@@ -156,8 +156,8 @@
     text-decoration: none;
 
     &:hover, &:focus-visible {
-      color: $cyan;
-      [data-theme="light"] & { color: $purple; }
+      color: $accent;
+      [data-theme="light"] & { color: $accent-alt; }
     }
   }
 }

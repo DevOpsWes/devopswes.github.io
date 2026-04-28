@@ -1,4 +1,4 @@
-// =============================================================================
+﻿// =============================================================================
 // BLOG POST ARTICLE
 // =============================================================================
 
@@ -22,7 +22,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(to right, $cyan, $purple, transparent);
+    background: linear-gradient(to right, $accent, $gradient-end, transparent);
   }
 }
 
@@ -74,9 +74,9 @@
     margin-top: 2.25rem;
     color: var(--text);
     padding-left: $sp-3;
-    border-left: 3px solid $cyan;
+    border-left: 3px solid $accent;
 
-    [data-theme="light"] & { border-left-color: $purple; }
+    [data-theme="light"] & { border-left-color: $accent-alt; }
   }
 
   h4 {
@@ -113,14 +113,14 @@
   }
 
   a {
-    color: $cyan;
+    color: $accent;
     text-decoration: underline;
-    text-decoration-color: rgba($cyan, 0.35);
+    text-decoration-color: rgba($accent, 0.35);
     text-underline-offset: 3px;
 
     &:hover {
-      text-decoration-color: $cyan;
-      [data-theme="light"] & { color: $purple; text-decoration-color: $purple; }
+      text-decoration-color: $accent;
+      [data-theme="light"] & { color: $accent-alt; text-decoration-color: $accent-alt; }
     }
   }
 
@@ -129,11 +129,11 @@
     font-family: $font-mono;
     font-size: 0.85em;
     background: var(--card);
-    color: $cyan;
+    color: $accent;
     padding: 0.15em 0.45em;
     border-radius: $r-sm;
     border: 1px solid var(--border);
-    [data-theme="light"] & { color: $purple; }
+    [data-theme="light"] & { color: $accent-alt; }
   }
 
   // Code blocks
@@ -161,14 +161,14 @@
   }
 
   blockquote {
-    border-left: 4px solid $cyan;
+    border-left: 4px solid $accent;
     margin: 2.5rem 0;
     padding: $sp-4 $sp-6 $sp-4 $sp-8;
     background: var(--card);
     border-radius: 0 $r-md $r-md 0;
     font-size: 1.05rem;
 
-    [data-theme="light"] & { border-left-color: $purple; }
+    [data-theme="light"] & { border-left-color: $accent-alt; }
 
     p {
       font-style: italic;
@@ -194,10 +194,10 @@
         content: '▸';
         position: absolute;
         left: 0;
-        color: $cyan;
+        color: $accent;
         font-size: 0.75em;
         top: 0.3em;
-        [data-theme="light"] & { color: $purple; }
+        [data-theme="light"] & { color: $accent-alt; }
       }
     }
   }
@@ -307,7 +307,7 @@
   font-size: 0.9rem;
   text-decoration: none;
 
-  &:hover { color: $cyan; }
+  &:hover { color: $accent; }
 }
 
 // Static pages
@@ -332,18 +332,18 @@
 
 // TL;DR callout — embedded in post content via {% include tldr.html text="..." %}
 .post-tldr {
-  border-left: 4px solid $cyan;
+  border-left: 4px solid $accent;
   border-radius: 0 $r-md $r-md 0;
-  background: rgba($cyan, 0.1);
-  border: 1px solid rgba($cyan, 0.3);
-  border-left: 4px solid $cyan;
+  background: rgba($accent, 0.1);
+  border: 1px solid rgba($accent, 0.3);
+  border-left: 4px solid $accent;
   padding: $sp-6;
   margin-bottom: $sp-8;
 
   [data-theme="light"] & {
-    background: rgba($purple, 0.07);
-    border-color: rgba($purple, 0.3);
-    border-left-color: $purple;
+    background: rgba($accent-alt, 0.07);
+    border-color: rgba($accent-alt, 0.3);
+    border-left-color: $accent-alt;
   }
 
   .post-tldr-label {
@@ -353,9 +353,9 @@
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: $cyan;
+    color: $accent;
     margin-bottom: $sp-2;
-    [data-theme="light"] & { color: $purple; }
+    [data-theme="light"] & { color: $accent-alt; }
   }
 
   .post-tldr-text {

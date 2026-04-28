@@ -153,7 +153,7 @@ bundle exec jekyll serve --livereload
 |---|---|---|
 | Background | `#080c14` | `#f8fafc` |
 | Card | `#111827` | `#ffffff` |
-| Primary accent | `#00d4ff` (cyan) | `#7c3aed` (purple) |
+| Primary accent | `#f59e0b` (amber) | `#92400e` (amber-800) |
 | Text | `#e2e8f0` | `#0f172a` |
 | Muted | `#94a3b8` | `#475569` |
 

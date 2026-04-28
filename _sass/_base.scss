@@ -1,4 +1,4 @@
-// =============================================================================
+﻿// =============================================================================
 // CSS CUSTOM PROPERTIES & RESET
 // =============================================================================
 
@@ -64,13 +64,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: $cyan;
+  color: $accent;
   text-decoration: none;
   transition: color $t-fast;
 
-  &:hover { color: lighten($cyan, 12%); }
+  &:hover { color: lighten($accent, 12%); }
   &:focus-visible {
-    outline: 2px solid $cyan;
+    outline: 2px solid $accent;
     outline-offset: 3px;
     border-radius: 3px;
   }
@@ -84,7 +84,7 @@ ul, ol { list-style: none; }
   position: absolute;
   top: -100%;
   left: 1rem;
-  background: $cyan;
+  background: $accent;
   color: $dark-bg;
   font-weight: 700;
   padding: 0.5rem 1rem;

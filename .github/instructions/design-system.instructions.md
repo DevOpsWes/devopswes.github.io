@@ -9,8 +9,9 @@ applyTo: "_sass/**,assets/css/**,assets/js/**,_layouts/**,_includes/**"
 
 | Token | Value | Usage |
 |---|---|---|
-| `$cyan` | `#00d4ff` | Primary accent, links, hero (dark mode) |
-| `$purple` | `#7c3aed` | Primary accent (light mode), secondary highlights |
+| `$accent` | `#f59e0b` | Primary brand accent — links, hero glow, borders (dark mode) |
+| `$accent-alt` | `#92400e` | Primary accent (light mode) — 6.78:1 contrast on white, WCAG AA+ |
+| `$gradient-end` | `#fb923c` | Gradient second stop (orange), also decorative accents |
 | `$dark-bg` | `#080c14` | Page background (dark mode) |
 | `$dark-surface` | `#0d1117` | Cards, header background (dark mode) |
 | `$dark-border` | `rgba(255,255,255,0.08)` | Borders in dark mode |
@@ -44,7 +45,7 @@ Light mode overrides are set on `[data-theme="light"]` using CSS custom properti
 - Robot image: `assets/images/hero-bot.svg` — custom SVG illustration, winking robot with speech bubble "404: feelings not found / exit code: 0 ✓"
 - The robot uses CSS class `.floating` which applies `@keyframes float` (translateY).
 - `prefers-reduced-motion` disables the float animation.
-- Drop-shadow glow: cyan in dark mode, purple in light mode.
+- Drop-shadow glow: amber in dark mode, dark amber in light mode.
 
 ## Animations
 
