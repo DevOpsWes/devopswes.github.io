@@ -54,6 +54,44 @@ I opened both datasets in VS Code and wrote out an instruction set. Not a quick 
 5. For each possible cause, assess whether the other data in the dataset can rule it out. Remove it from the list if it can be confidently eliminated.
 6. What's left after elimination is your prioritised suspect list.
 
+Here's what the file actually looks like. I keep a `copilot-instructions.md` in the root of the VS Code workspace alongside the data folders, so Copilot picks it up as context automatically:
+
+```markdown
+# Investigation Brief
+
+## Your role
+You are an expert in [technology/platform]. Follow these instructions to find
+the root cause of the issue described below.
+
+## The error
+[Paste the full error message and stack trace here — don't summarise it.
+Give Copilot the raw text so it can match it against what appears in the logs.]
+
+## The data
+The subfolders in this workspace contain forensic data captured automatically
+when the error occurred:
+
+- **[MACHINE-AFFECTED]** — data from the machine where the error occurred.
+  Captured at [timestamp].
+- **[MACHINE-CLEAN]** — data from a healthy machine in the same environment.
+  Captured at roughly the same time, used as a clean baseline.
+
+## Instructions
+1. Find the error occurrence in the data. Note the exact timestamp.
+2. Analyse all available data from the affected machine in the 30-60 minutes
+   before and after that timestamp.
+3. Compare against the clean machine. List everything that is present or
+   different in the affected machine's data.
+4. For each item on that list: assess whether other data in the dataset can
+   rule it out as a cause. If it can be eliminated, remove it and say why.
+5. Return the remaining suspects in priority order with the evidence for each.
+
+**Important:** Include informational events in your analysis, not just errors
+and warnings. Root causes often hide there.
+```
+
+The file is the brief. Not a chat message — a file that lives in the workspace. That distinction matters: it doesn't disappear between sessions, you can refine it as the investigation develops, and Copilot reads the current version every time you ask a new question. When I brought in additional machines' data mid-investigation, I added a new section to the bottom of the file explaining what the new folders contained and asked Copilot to validate whether the fresh data matched its initial conclusions. It did. That's a different workflow from re-pasting a prompt into a chat window.
+
 The elimination step was deliberate. When you're debugging something with no obvious error trail, the instinct is to collect more suspects. What you actually need is to throw suspects *out* faster. Every eliminated cause is investigation time you don't have to spend.
 
 ## What Copilot found
@@ -79,6 +117,47 @@ A few things came together here that are worth pulling apart if you want to try 
 **The instruction set mattered.** A vague prompt produces a vague answer. Writing out the investigation brief properly, with the elimination step explicitly included, is what produced something useful. Treat it like briefing a junior analyst who is very thorough but needs to be told exactly what you're after.
 
 **Look at informational events.** I'll be honest: I would not have found this on my own, because I was filtering for errors and warnings. The root cause was hiding in an informational event that I'd have scrolled past without a second thought. If you're asking AI to investigate logs, tell it explicitly to include informational events in its analysis. The smoking gun might be there.
+
+## Try it yourself
+
+The folder structure that makes this work:
+
+```
+_Copilot-Troubleshooting/
+├── copilot-instructions.md         ← the brief Copilot reads first
+├── MACHINE-AFFECTED_[timestamp]/   ← forensic data from the broken machine
+│   ├── Application.evtx
+│   ├── System.evtx
+│   └── [your app-specific log]
+└── MACHINE-CLEAN_[timestamp]/      ← same data from a healthy machine
+    ├── Application.evtx
+    └── System.evtx
+```
+
+Open the whole folder as a VS Code workspace. Copilot's context covers all open files, so the brief and the data are in the same session without you needing to copy-paste anything manually.
+
+One practical problem: `.evtx` files from Windows Event Viewer are binary. Copilot can't read them directly. If you're on Windows and want to pull the relevant window of events without loading everything into Event Viewer by hand:
+
+```powershell
+$errorTime  = [datetime]"2025-04-15 09:23:00"  # replace with your error timestamp
+$windowMins = 30
+$evtxPath   = ".\MACHINE-AFFECTED\Application.evtx"
+$outputPath = ".\events-around-error.csv"
+
+Get-WinEvent -Path $evtxPath -ErrorAction SilentlyContinue |
+    Where-Object {
+        $_.TimeCreated -ge ($errorTime - (New-TimeSpan -Minutes $windowMins)) -and
+        $_.TimeCreated -le ($errorTime + (New-TimeSpan -Minutes $windowMins))
+    } |
+    Select-Object TimeCreated, Id, LevelDisplayName, ProviderName, Message |
+    Export-Csv -Path $outputPath -NoTypeInformation
+
+Write-Host "Exported $((Import-Csv $outputPath | Measure-Object).Count) events to $outputPath"
+```
+
+Drop the resulting CSV into your workspace and it becomes readable data. For application logs that are already plain text (anything with timestamps in a `.log` file), you don't need to do anything — put them in the folder and they're usable as-is.
+
+One more thing about the brief. Don't try to be thorough on the first pass. Start with the error, the timestamp, and the two dataset paths. Run an initial pass. Then update the file based on what Copilot surfaces, or add a new section when you bring in more data. I added mid-investigation instructions as a separate block at the bottom of the file. Copilot picked them up on the next question without me having to re-explain the context. The brief is a living document, not a one-shot prompt.
 
 ---
 
