@@ -65,7 +65,7 @@ This methodology may recur in future posts. When referencing it, keep the framin
 These phrases signal AI-generated content. Never use them:
 
 - "It's worth noting that..."
-- "In conclusion..."
+- "In conclusion..." / "In summary..." / "To summarise..."
 - "Delve into"
 - "In the realm of"
 - "Game-changing" / "cutting-edge" / "revolutionary"
@@ -76,8 +76,20 @@ These phrases signal AI-generated content. Never use them:
 - "Unlock the potential of"
 - "In today's fast-paced world"
 - "Seamlessly"
-- Any numbered list of exactly 5 perfectly parallel items with identical grammatical structure
+- "Furthermore" / "Moreover" / "Additionally" as sentence openers
+- "This highlights the importance of" / "It should be noted that" / "Building on this"
+- "As a result" as a sentence opener (use "So" or restructure)
+- Any list of exactly 3 or 5 perfectly parallel items with identical grammatical structure
 - Em dashes (`—`). Use a comma, colon, or rewrite the sentence instead.
+
+## Banned Structural Patterns
+
+These structural patterns are as revealing as banned phrases:
+
+- **Throat-clearing introductions:** Never open with "In this post, I'll...", broad scene-setting about the state of the industry, or context before the actual situation. Start inside the problem.
+- **Summary endings:** Never end with a paragraph that restates what was already said. End on a specific observation.
+- **Frictionless narratives:** Never present a linear problem-solution arc with no dead ends, uncertainty, or failed attempts. Real investigation has wrong turns.
+- **Interchangeable prose:** If a sentence could appear in any DevOps blog without modification, it needs to be more specific or cut entirely.
 
 ## Structure
 

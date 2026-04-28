@@ -32,6 +32,8 @@ Scoped instruction files in `.github/instructions/` apply automatically by file 
 | `writing-style.instructions.md` | `**/*.md` — voice, banned phrases, tone |
 | `design-system.instructions.md` | `_sass/**`, `assets/css/**` — tokens, theme |
 | `security.instructions.md` | `**` — secrets, auth, never-do list |
+| `blog-writing-agent.instructions.md` | `_posts/**` — drafting workflow and micro-patterns for new posts |
+| `ai-detection-agent.instructions.md` | `_posts/**` — AI pattern detection rubric (invoke explicitly to review a draft) |
 
 ## Global Rules
 
