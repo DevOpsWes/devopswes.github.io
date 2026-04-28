@@ -7,8 +7,6 @@ excerpt: "The issue couldn't be reproduced. The logs showed nothing. No errors, 
 
 {% include tldr.html text="A Citrix DaaS issue with no errors in any log. I used a ControlUp trigger to automatically capture 40 minutes of forensic data around each occurrence, then briefed Copilot to cross-reference it against a clean baseline with an explicit elimination step. The root cause was hiding in an informational event: two Azure auth module versions loaded simultaneously, neither failing. You wouldn't have found it reading logs by hand." %}
 
-I want to tell you about the moment I stopped thinking of Copilot as a code assistant and started thinking of it as an investigator.
-
 We had a problem in our Citrix Cloud DaaS environment that had been annoying people for weeks. Users would hit an issue, we couldn't figure out why, and we absolutely could not reproduce it on demand. It just happened. Randomly. Then stopped. Then happened again.
 
 No error. No warning. Nothing obvious in any log we checked manually.

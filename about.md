@@ -6,9 +6,9 @@ permalink: /about/
 
 ## Hey, I'm Wesly 👋
 
-I'm a DevOps Engineer based in The Netherlands with over **20 years of hands-on IT experience**, and I'm more energised by technology today than I've ever been. That's because AI just changed everything, and I'm here for it.
+I'm a DevOps Engineer based in The Netherlands with over **20 years of hands-on IT experience**, and right now is the most interesting stretch of that career. Most of that is because of what AI is doing to the work, and I'd rather figure that out by doing it than by reading trend pieces about it.
 
-Right now I'm navigating the same transformation you probably are: figuring out what AI actually means for the way we build, deploy, automate, and work. This blog is my way of making sense of it, out loud, in public, with you.
+I'm figuring out what AI actually means for the way we build, deploy, automate, and work. This blog is how I make sense of it, in public, with the people doing the same work.
 
 ---
 
@@ -32,27 +32,25 @@ That journey led me to my current role at **Nationale-Nederlanden**, where I wor
 
 ---
 
-## Now: AI Is Transforming Everything
+## What AI is actually doing to this work
 
-Here's what I know for sure: AI isn't a trend. It's a platform shift, like the cloud was in 2010, but faster and wider.
+I have GitHub Copilot in VS Code every day, and Ollama running in my home lab. One recent example: I used Copilot to compare 40 minutes of forensic VDI log data against a clean baseline and found a root cause I probably wouldn't have caught by hand. That's the kind of shift I'm trying to document here: what changes when you add AI to a real infrastructure job with real constraints.
 
-Every workflow I've built, every script I've written, every pipeline I've maintained: AI is changing what's possible. And I'm not watching from the sidelines. I'm learning, experimenting, integrating, and documenting everything worth sharing.
-
-That's what this blog is about.
+Most of what gets written about AI is either marketing copy or academic theory. This blog is neither.
 
 ---
 
 ## What You'll Find Here
 
-Practical content across the five topics that keep me busy every day:
+Most posts land in a few overlapping areas.
 
-- **AI:** LLMs, agents, local AI with Ollama, prompt engineering, and real-world AI integrations that actually ship
-- **DevOps:** Azure DevOps, CI/CD pipelines, GitOps, Terraform, and platform engineering patterns
-- **Cloud:** Azure, cloud-native architecture, IaC, cost control, and building resilient systems at scale
-- **Automation:** PowerShell, Python, API integrations, and workflow automation that compounds over time
-- **Virtual Desktop Environments:** Citrix Cloud DaaS, VDI architecture, workspace management, and the future of the digital workplace
+**AI** is the newest and fastest-moving: practical use of LLMs, local AI with Ollama, Copilot as an investigation tool, and prompt engineering that actually produces something useful.
 
-No fluff. No hype. Just real insights from an engineer in the trenches.
+**DevOps and Cloud** is the day job: Azure DevOps, Terraform, Git, CI/CD, and the infrastructure decisions that either hold up under load or don't.
+
+**Automation** runs through everything I've ever done. PowerShell, Python, API integrations, scripting away whatever it takes to stop doing the same thing twice.
+
+**Virtual Desktop Environments** is my specialty area. Citrix Cloud DaaS, FSLogix, ControlUp, VDI architecture. The unglamorous but critical layer that most enterprises can't do without.
 
 ## Get in Touch
 

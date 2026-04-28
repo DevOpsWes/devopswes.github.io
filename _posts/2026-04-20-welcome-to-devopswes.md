@@ -15,7 +15,7 @@ That last part is why I'm writing this.
 
 I've never been much of a blogger. Writing felt like work I wasn't being paid for. But the AI thing broke that logic, because everything is moving so fast that the only way I can keep up with what I'm learning is to write it down. And if I'm writing it anyway, I might as well share it.
 
-So that's the deal here. I'm a practitioner, not an influencer. I'll write about stuff I've actually tried, problems I've actually hit, and tools I'm actually using. When something doesn't work, I'll say so. When I'm not sure yet, I'll say that too.
+So that's the deal here. I'm a practitioner, not an influencer. I write about things I've used and the problems that came with them. If something doesn't work, I'll say so. If I'm not sure yet, I'll say that too.
 
 **What you'll find here:**
 
