@@ -13,22 +13,22 @@
     belowGap   : 16,   // px below .site-intro-center bottom for dog run path
 
     // Display sizes (px) at scaleDesktop = 1.0 — match SVG viewBox dimensions
-    rW: 80,  rH: 112,   // robot
+    rW: 120, rH: 112,  // robot total div width (body=0-80 in viewBox, arm buffer=80-120)
+    robotBodyW: 80,    // visual body width — used to position body's right edge near title
     dW: 96,  dH: 88,    // dog (wider viewBox to show full tail)
     bW: 44,  bH: 20,    // bone
 
-    // Robot arm geometry (in viewBox units, pivot = shoulder = arm-group top-center)
-    armRest   :  15,    // deg at rest (gentle forward lean)
-    armWindup : -52,    // deg pulled back (CCW in SVG = behind robot)
-    armThrow  :  68,    // deg snapped forward
+    // Robot arm geometry (in viewBox units, pivot = fill-box top-center ≈ (68, 56))
+    // CW rotation (+) swings arm LEFT (forward in side view); CCW (-) swings arm RIGHT (back/toward dog)
+    armRest   :  15,    // deg at rest — hand at ~(57, 97) in viewBox
+    armWindup : -52,    // deg pulled back right — hand at ~(101, 82) ← RIGHT of body, OUTSIDE old 80px viewBox
+    armThrow  :  68,    // deg snapped forward left — hand at ~(29, 72)
 
-    // Robot hand center at THROW pose (viewBox units):
-    // shoulder(67,56) + 44px * sin(68°), cos(68°) ≈ (67+40.8, 56+16.5) = (108, 72)
-    handThrowVX: 108,  handThrowVY: 72,
-
-    // Robot hand center at REST pose (viewBox units) — arm hangs at armRest=15°
-    // pivot(67,56) + 49px*sin(15°), 49px*cos(15°) ≈ (67+12.7, 56+47.3) = (80, 103)
-    handRestVX: 80,  handRestVY: 103,
+    // Robot hand centre in viewBox coordinates (pivot=(68,56), arm-length=42px):
+    // hand_x = 68 − 42·sin(θ),  hand_y = 56 + 42·cos(θ)
+    handThrowVX:  29,  handThrowVY:  72,   // θ=+68° → bone launch point
+    handRestVX :  57,  handRestVY :  97,   // θ=+15° → bone idle (in robot hand)
+    handWindupVX: 101, handWindupVY: 82,   // θ=−52° → arm reaches RIGHT toward dog (receive pose)
 
     // Dog mouth center (left tip of snout) in dog viewBox units
     mouthVX: 3,  mouthVY: 32,
@@ -113,11 +113,12 @@
   }
 
   // ─── SVG ART: ROBOT ────────────────────────────────────────────────────────
-  // viewBox 0 0 80 112  |  facing RIGHT  |  arm pivot = top-center of arm group
+  // viewBox 0 0 120 112  |  facing RIGHT  |  body occupies x=0-80; x=80-120 is arm-buffer
+  // Arm pivot (68,56); at armWindup(-52°) hand reaches x≈101 — contained in 120-wide viewBox
   function buildRobot() {
     // innerHTML approach: browser HTML parser handles SVG namespace — guaranteed render
     var wrap = document.createElement('div');
-    wrap.innerHTML = '<svg viewBox="0 0 80 112" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;display:block">'
+    wrap.innerHTML = '<svg viewBox="0 0 120 112" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="overflow:visible;display:block">'
       + '<defs><filter id="rbr-g" x="-60%" y="-60%" width="220%" height="220%">'
       + '<feGaussianBlur stdDeviation="2.2" result="bl"/>'
       + '<feMerge><feMergeNode in="bl"/><feMergeNode in="SourceGraphic"/></feMerge>'
@@ -335,13 +336,14 @@
     var s = isMob ? Cfg.scaleMobile : Cfg.scaleDesktop;
 
     var rW = Cfg.rW * s,  rH = Cfg.rH * s;
+    var robotBodyW = Cfg.robotBodyW * s;   // visual body width for positioning
     var dW = Cfg.dW * s,  dH = Cfg.dH * s;
     var bW = Cfg.bW * s,  bH = Cfg.bH * s;
     var gap = Cfg.sideGap;
 
     // Stage extends outward from .rb-doghero wrapper in all directions
     var exTop  = Cfg.arcHeight + 36;
-    var exLeft = rW + gap + 20;
+    var exLeft = rW + gap + 20;   // rW=120 so stage extends far enough left for arm buffer
     var exRight= dW + gap + 20;
     var exBot  = Cfg.belowGap + dH + 20;
 
@@ -349,21 +351,21 @@
     var soX = wR.left - exLeft;
     var soY = wR.top  - exTop;
 
-    // Robot: left of title, vertically centred on title midpoint
-    var robotX = tR.left  - soX - rW - gap;
+    // Robot: position so the BODY's right edge (x=robotBodyW in div) is gap px left of title
+    var robotX = tR.left  - soX - robotBodyW - gap;
     var robotY = tR.top   - soY + (tR.height - rH) / 2;
 
     // Dog: right of title, same vertical alignment
     var dogIdleX = tR.right - soX + gap;
     var dogIdleY = tR.top   - soY + (tR.height - dH) / 2;
 
-    // Robot hand at THROW pose (viewBox coords scaled to display)
-    var handX = robotX + Cfg.handThrowVX * s;
-    var handY = robotY + Cfg.handThrowVY * s;
-
-    // Robot hand at REST pose (arm hanging down at armRest angle)
-    var handRestX = robotX + Cfg.handRestVX * s;
-    var handRestY = robotY + Cfg.handRestVY * s;
+    // Robot hand positions (viewBox coords × scale, offset from robotDiv top-left)
+    var handX      = robotX + Cfg.handThrowVX  * s;   // hand at armThrow (+68°)  → ~x=29
+    var handY      = robotY + Cfg.handThrowVY  * s;
+    var handRestX  = robotX + Cfg.handRestVX   * s;   // hand at armRest  (+15°)  → ~x=57
+    var handRestY  = robotY + Cfg.handRestVY   * s;
+    var handWindupX= robotX + Cfg.handWindupVX * s;   // hand at armWindup(−52°)  → ~x=101 (receive)
+    var handWindupY= robotY + Cfg.handWindupVY * s;
 
     // Dog mouth (centre of bone catch point)
     var mouthX = dogIdleX + Cfg.mouthVX * s;
@@ -376,7 +378,7 @@
     // Dog run path — below the full .site-intro-center block
     var runY      = cR.bottom - soY + Cfg.belowGap;
     var runStartX = dogIdleX;
-    var runEndX   = robotX + rW + gap;
+    var runEndX   = robotX + robotBodyW + gap;   // body right edge + gap → dog meets robot arm
 
     geo = {
       s:s, rW:rW, rH:rH, dW:dW, dH:dH, bW:bW, bH:bH,
@@ -384,6 +386,7 @@
       dogIdleX:dogIdleX, dogIdleY:dogIdleY,
       handX:handX, handY:handY,
       handRestX:handRestX, handRestY:handRestY,
+      handWindupX:handWindupX, handWindupY:handWindupY,
       mouthX:mouthX, mouthY:mouthY,
       arcCX:arcCX, arcCY:arcCY,
       runY:runY, runStartX:runStartX, runEndX:runEndX,
@@ -555,33 +558,33 @@
   async function handoffPhase() {
     var g = geo;
 
-    // 1. Robot sees the dog and extends arm to receive the bone
+    // 1. Robot sees dog arriving and reaches arm BEHIND itself (armWindup = -52°)
+    //    At this angle the arm extends RIGHT to x≈101, meeting the dog at runEndX≈x+102.
     await go(robotEls.arm,
-      [{ transform: 'rotate(' + Cfg.armRest  + 'deg)' },
-       { transform: 'rotate(' + Cfg.armThrow + 'deg)' }],
+      [{ transform: 'rotate(' + Cfg.armRest   + 'deg)' },
+       { transform: 'rotate(' + Cfg.armWindup + 'deg)' }],
       { duration: PH.armExtend, easing: 'ease-out' });
 
-    // 2. Visual bone transfer: switch from dog carry-bone to boneDiv in robot's hand
+    // 2. Bone transfers: dog carry-bone hides, boneDiv appears at robot's outstretched hand
     dogEls.carryBone.setAttribute('opacity', '0');
     dogEls.tongue.setAttribute('opacity', '0');
     boneDiv.style.transform =
-      'translate(' + (g.handX - g.bW/2) + 'px,' + (g.handY - g.bH/2) + 'px)';
+      'translate(' + (g.handWindupX - g.bW/2) + 'px,' + (g.handWindupY - g.bH/2) + 'px)';
     boneDiv.style.opacity = '1';
 
-    // Brief pause so the handoff is visible
+    // Brief pause — handoff moment is clearly visible
     await wait(PH.handoff);
 
     // 3. Robot arm returns to rest (holding bone) — concurrent with dog running back
     var armRestDone = go(robotEls.arm,
-      [{ transform: 'rotate(' + Cfg.armThrow + 'deg)' },
-       { transform: 'rotate(' + Cfg.armRest  + 'deg)' }],
+      [{ transform: 'rotate(' + Cfg.armWindup + 'deg)' },
+       { transform: 'rotate(' + Cfg.armRest   + 'deg)' }],
       { duration: PH.armExtend, easing: 'ease-in-out' });
 
     // 4. Dog flips to face right (scaleX(-1)) and runs back left→right under title
     var runBackStart = 'translate(' + g.runEndX   + 'px,' + g.runY + 'px) scaleX(-1)';
     var runBackEnd   = 'translate(' + g.runStartX + 'px,' + g.runY + 'px) scaleX(-1)';
 
-    // Set starting transform before animating (dog is already at runEndX,runY from returnPhase)
     dogDiv.style.transform = runBackStart;
 
     var runBackDone = go(dogDiv,
@@ -606,16 +609,16 @@
        { transform: 'translate(' + g.dogIdleX + 'px,' + g.dogIdleY + 'px) scaleX(-1)' }],
       { duration: PH.runDrop, easing: 'ease-out' });
 
-    // 6. Snap dog back to face-left pose; reset leg/tail transforms
+    // 6. Snap dog back to face-left; reset leg/tail transforms
     dogDiv.style.transform = 'translate(' + g.dogIdleX + 'px,' + g.dogIdleY + 'px)';
     dogEls.fl.style.transform   = '';
     dogEls.bl.style.transform   = '';
     dogEls.tail.style.transform = '';
 
-    // 7. Move boneDiv to rest-pose position (arm is now at rest angle)
+    // 7. Slide bone to arm-at-rest position
     boneDiv.style.transform =
       'translate(' + (g.handRestX - g.bW/2) + 'px,' + (g.handRestY - g.bH/2) + 'px)';
-    // boneDiv stays visible — robot holds the bone during idle
+    // boneDiv stays visible — robot holds bone in resting hand during idle
 
     // 8. Idle pause before next throw
     await wait(PH.idle);
