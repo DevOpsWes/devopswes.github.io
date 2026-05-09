@@ -3,10 +3,14 @@
 // =============================================================================
 
 .post-article {
-  padding: $sp-12 0 $sp-16;
+  padding-top: $sp-12;
+  padding-bottom: $sp-16;
   max-width: $content-w;
 
-  @media (max-width: 640px) { padding: $sp-8 0 $sp-12; }
+  @media (max-width: 640px) {
+    padding-top: $sp-8;
+    padding-bottom: $sp-12;
+  }
 }
 
 .post-header {
@@ -56,6 +60,9 @@
 
 // Post body — styles all markdown output
 .post-content {
+  overflow-wrap: break-word;
+  word-break: break-word;
+
   > * + * { margin-top: 1.75rem; }
 
   h2 {
@@ -143,7 +150,13 @@
     border-radius: $r-md;
     padding: $sp-6;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     margin: 2rem 0;
+
+    @media (max-width: 640px) {
+      padding: $sp-4;
+      border-radius: $r-sm;
+    }
 
     [data-theme="light"] & {
       background: #2d3748;
@@ -157,6 +170,9 @@
       color: #e2e8f0;
       font-size: 0.875rem;
       line-height: 1.7;
+
+      @media (max-width: 640px) { font-size: 0.8rem; }
+
       // Override the inline-code light-mode colour rule — text stays light on the dark code bg
       [data-theme="light"] & { color: #e2e8f0; }
     }
@@ -315,7 +331,13 @@
 // Static pages
 .page-article {
   max-width: $content-w;
-  padding: $sp-12 0 $sp-16;
+  padding-top: $sp-12;
+  padding-bottom: $sp-16;
+
+  @media (max-width: 640px) {
+    padding-top: $sp-8;
+    padding-bottom: $sp-12;
+  }
 }
 
 .page-header {
