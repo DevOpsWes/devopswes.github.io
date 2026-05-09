@@ -57,6 +57,8 @@ Run through these before the post is done:
 - Is there at least one moment of admitted uncertainty, failure, or "I don't know yet"?
 - Does the last paragraph land on an observation, not a summary?
 - Does this post sound different from the other posts — or is it using the same opening rhythm?
+- **Is the word count at least 300 words?** (body text + TL;DR; excluding front matter YAML and code blocks)
+- **Does the post have a header image?** Is `image:` set in front matter, and does the SVG file exist in `assets/images/posts/`?
 
 ---
 

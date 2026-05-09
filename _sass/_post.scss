@@ -265,6 +265,72 @@
   }
 }
 
+// Hero image support — rendered when `image:` is set in post front matter
+.post-header--hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: $r-lg;
+  min-height: 320px;
+  padding: $sp-16 $sp-8 $sp-10;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: $sp-12;
+
+  // Hide the gradient rule — the image provides visual separation
+  &::after { display: none; }
+
+  .post-title { text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7); }
+  .post-subtitle { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6); }
+
+  @media (max-width: 768px) {
+    min-height: 240px;
+    padding: $sp-12 $sp-6 $sp-8;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 200px;
+    padding: $sp-8 $sp-4 $sp-6;
+    border-radius: $r-md;
+  }
+}
+
+// Lift all direct children above the background image
+.post-header--hero > *:not(.post-hero-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+// Background image container
+.post-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  // Dark gradient overlay — keeps title text readable
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      175deg,
+      rgba(8, 12, 20, 0.28) 0%,
+      rgba(8, 12, 20, 0.70) 50%,
+      rgba(8, 12, 20, 0.96) 100%
+    );
+  }
+}
+
 // Post footer & nav
 .post-footer {
   margin-top: $sp-16;

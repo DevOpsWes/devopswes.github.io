@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+  <defs>
+    <radialGradient id="wg-amber" cx="22%" cy="52%" r="48%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="wg-orange" cx="88%" cy="38%" r="42%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="wg-dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="0.5" cy="0.5" r="0.9" fill="rgba(255,255,255,0.055)"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="480" fill="#080c14"/>
+  <rect width="1200" height="480" fill="url(#wg-dots)"/>
+  <rect width="1200" height="480" fill="url(#wg-amber)"/>
+  <rect width="1200" height="480" fill="url(#wg-orange)"/>
+
+  <!-- Horizontal pipeline spine -->
+  <line x1="80" y1="240" x2="1120" y2="240" stroke="rgba(245,158,11,0.14)" stroke-width="1.5"/>
+
+  <!-- Milestone: 2001 (Citrix) -->
+  <circle cx="155" cy="240" r="30" fill="#0d1117" stroke="#f59e0b" stroke-width="1.5" opacity="0.55"/>
+  <text x="155" y="236" text-anchor="middle" fill="#f59e0b" font-size="10" font-family="monospace" opacity="0.7">2001</text>
+  <text x="155" y="249" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="monospace" opacity="0.55">CITRIX</text>
+
+  <!-- Connector -->
+  <line x1="185" y1="240" x2="285" y2="240" stroke="rgba(245,158,11,0.2)" stroke-width="1"/>
+
+  <!-- Milestone: 2010 (VDI) -->
+  <circle cx="318" cy="240" r="30" fill="#0d1117" stroke="#f59e0b" stroke-width="1.5" opacity="0.6"/>
+  <text x="318" y="236" text-anchor="middle" fill="#f59e0b" font-size="10" font-family="monospace" opacity="0.72">2010</text>
+  <text x="318" y="249" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="monospace" opacity="0.58">VDI</text>
+
+  <!-- Connector -->
+  <line x1="348" y1="240" x2="448" y2="240" stroke="rgba(245,158,11,0.22)" stroke-width="1"/>
+
+  <!-- Milestone: 2019 (DevOps) — grows larger, brighter -->
+  <circle cx="484" cy="240" r="36" fill="#0d1117" stroke="#fb923c" stroke-width="2" opacity="0.72"/>
+  <text x="484" y="236" text-anchor="middle" fill="#fb923c" font-size="10" font-family="monospace" opacity="0.8">2019</text>
+  <text x="484" y="249" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="monospace" opacity="0.65">DEVOPS</text>
+
+  <!-- Connector -->
+  <line x1="520" y1="240" x2="628" y2="240" stroke="rgba(251,146,60,0.28)" stroke-width="1"/>
+
+  <!-- Milestone: 2023 (Cloud) -->
+  <circle cx="664" cy="240" r="34" fill="#0d1117" stroke="#fb923c" stroke-width="2" opacity="0.72"/>
+  <text x="664" y="236" text-anchor="middle" fill="#fb923c" font-size="10" font-family="monospace" opacity="0.8">2023</text>
+  <text x="664" y="249" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="monospace" opacity="0.65">CLOUD</text>
+
+  <!-- Connector (thicker, brighter — approaching the present) -->
+  <line x1="698" y1="240" x2="810" y2="240" stroke="rgba(245,158,11,0.35)" stroke-width="1.5"/>
+
+  <!-- Milestone: 2026 (AI) — current, most prominent -->
+  <circle cx="860" cy="240" r="48" fill="#0d1117" stroke="#f59e0b" stroke-width="2.5" opacity="0.95"/>
+  <circle cx="860" cy="240" r="60" fill="none" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4 7" opacity="0.22"/>
+  <text x="860" y="235" text-anchor="middle" fill="#f59e0b" font-size="12" font-family="monospace" font-weight="bold" opacity="1">2026</text>
+  <text x="860" y="251" text-anchor="middle" fill="#f59e0b" font-size="9" font-family="monospace" opacity="0.85">AI</text>
+
+  <!-- Future — dashed line fading out -->
+  <line x1="920" y1="240" x2="1120" y2="240" stroke="rgba(245,158,11,0.09)" stroke-width="1" stroke-dasharray="6 9"/>
+
+  <!-- Decorative: vertical faint grid lines -->
+  <line x1="380" y1="40" x2="380" y2="440" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+  <line x1="760" y1="40" x2="760" y2="440" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+  <line x1="1080" y1="40" x2="1080" y2="440" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+
+  <!-- Corner brackets -->
+  <g fill="none" stroke="rgba(245,158,11,0.14)" stroke-width="2" stroke-linecap="round">
+    <polyline points="36,36 36,22 50,22"/>
+    <polyline points="1164,36 1164,22 1150,22"/>
+    <polyline points="36,444 36,458 50,458"/>
+    <polyline points="1164,444 1164,458 1150,458"/>
+  </g>
+
+  <!-- Horizontal accent lines (top and bottom, subtle) -->
+  <line x1="0" y1="68" x2="1200" y2="68" stroke="rgba(245,158,11,0.04)" stroke-width="1"/>
+  <line x1="0" y1="412" x2="1200" y2="412" stroke="rgba(245,158,11,0.04)" stroke-width="1"/>
+</svg>

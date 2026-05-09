@@ -5,7 +5,12 @@ layout: default
 <div class="reading-progress" id="reading-progress" aria-hidden="true" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
 
 <article class="post-article container">
-  <header class="post-header">
+  <header class="post-header{% if page.image %} post-header--hero{% endif %}">
+    {% if page.image %}
+    <div class="post-hero-bg" role="presentation">
+      <img src="{{ page.image | relative_url }}" alt="" width="1200" height="480">
+    </div>
+    {% endif %}
     <div class="post-meta">
       {% if page.tags.size > 0 %}
       <div class="post-tags" aria-label="Tags">

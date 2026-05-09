@@ -2,6 +2,7 @@
 title: "Welcome to DevOpsWes: why I finally started writing things down"
 date: 2026-04-20
 tags: [AI, DevOps, Automation]
+image: /assets/images/posts/welcome-to-devopswes.svg
 excerpt: "20 years in IT and I never bothered blogging. Then AI showed up and changed the math."
 ---
 

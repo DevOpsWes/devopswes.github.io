@@ -26,6 +26,28 @@ Required first line of content (immediately after front matter):
 {% include tldr.html text="Two or three sentences. Give away the answer — what happened, what you found, what changed. Readers scanning before committing deserve the actual point, not a teaser." %}
 ```
 
+## Content Length
+
+- **Minimum: 300 words** of readable content — body text and TL;DR combined; front matter YAML and code blocks do not count toward this total.
+- **Target: 600–2,000 words.** Most posts land here.
+- **Soft cap: ~3,000 words.** If a draft exceeds this, consider splitting into a series. Not a hard rule — if the content genuinely earns the length, keep it.
+
+## Post Header Image
+
+Every post **must** have a header image. Rules:
+
+- **Generate it for the post** — do not reuse images from other posts or from `assets/images/`. Create a new one.
+- **Store it as an SVG** in `assets/images/posts/`, named after the post slug: `YYYY-MM-DD-post-slug.svg`.
+- **Make it relevant** — abstract or illustrative, relating the visual to the topic. Not a literal translation of the title.
+- **Keep it simple and original** — clean geometric or atmospheric design. Think: the dot-grid/glow aesthetic already on the site, adapted per post. No clipart, no stock-illustration style.
+- **Design for a dark overlay** — the CSS applies a dark gradient on top of the image so the title text remains readable. Use bright strokes, glowing shapes, or high-contrast geometry that shows through the overlay. Fine lines and rich amber/orange (#f59e0b / #fb923c) accents work well.
+
+Add to front matter:
+
+```yaml
+image: /assets/images/posts/YYYY-MM-DD-post-slug.svg
+```
+
 ## Front Matter Rules
 
 - `title`: Direct and specific. Not clickbait. Not "5 Ways to...". Not "The Ultimate Guide to...".
@@ -50,9 +72,11 @@ To add a new tag, also add it to the footer topic links in `_includes/footer.htm
 
 1. **"Welcome to DevOpsWes: why I finally started writing things down"** (`2026-04-20`)
    - Introductory post. Sets tone and explains the blog's purpose. References Wesly's 20+ year career.
+   - Image: `assets/images/posts/welcome-to-devopswes.svg` (career pipeline / milestone nodes theme)
 
 2. **"How I used Copilot to find a VDI bug that left no errors in any log"** (`2026-04-15`)
    - Real story: ControlUp trigger captured 40 min of forensic data (Event logs, FSLogix logs, registry, installed apps) around a random Citrix DaaS issue. Used Copilot in VS Code with a structured investigation brief and a clean-baseline dataset to find the root cause: multiple Azure auth module versions loaded simultaneously, hidden in informational XML event data.
+   - Image: `assets/images/posts/ai-vdi-bug-investigation.svg` (signal-in-noise / log stream with spotlight theme)
 
 ## Post Structure Guidance
 

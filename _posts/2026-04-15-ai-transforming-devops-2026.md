@@ -2,6 +2,7 @@
 title: "How I used Copilot to find a VDI bug that left no errors in any log"
 date: 2026-04-15
 tags: [AI, DevOps, Automation, Virtual-Desktop-Environments]
+image: /assets/images/posts/ai-vdi-bug-investigation.svg
 excerpt: "The issue couldn't be reproduced. The logs showed nothing. No errors, no warnings, no obvious trail. Here's how I found it anyway."
 ---
 
