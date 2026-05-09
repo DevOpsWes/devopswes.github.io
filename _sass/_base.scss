@@ -38,6 +38,7 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable; // prevents layout shift when scrollbar appears/disappears
 }
 
 body {
