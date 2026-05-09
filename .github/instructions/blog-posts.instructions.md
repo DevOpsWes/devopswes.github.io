@@ -26,6 +26,23 @@ Required first line of content (immediately after front matter):
 {% include tldr.html text="Two or three sentences. Give away the answer — what happened, what you found, what changed. Readers scanning before committing deserve the actual point, not a teaser." %}
 ```
 
+## Table of Contents
+
+Any post with **3 or more H2 sections** must include a Table of Contents. Place it immediately after the TL;DR block, before the first paragraph.
+
+Use Kramdown's built-in ToC syntax (works natively on GitHub Pages — no plugin needed):
+
+```markdown
+{% include tldr.html text="..." %}
+
+* contents
+{:toc}
+
+First paragraph of the post...
+```
+
+The `* contents` line is a placeholder — Kramdown replaces the entire list with auto-generated anchor links. Posts with fewer than 3 H2 sections do not need a ToC.
+
 ## Content Length
 
 - **Minimum: 300 words** of readable content — body text and TL;DR combined; front matter YAML and code blocks do not count toward this total.
