@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" fill="none">
+  <defs>
+    <filter id="dg-glow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="dg-glow-lg">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="dg-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1a2235"/>
+    </linearGradient>
+    <radialGradient id="dg-eye" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="70%" stop-color="#f59e0b" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ground glow -->
+  <ellipse cx="100" cy="252" rx="56" ry="7" fill="#f59e0b" opacity="0.06"/>
+
+  <!-- BONE — flying in from upper-left (from the robot's direction) -->
+  <g transform="rotate(-28 52 26)" opacity="0.92">
+    <rect x="22" y="23" width="60" height="7" rx="3.5" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.4" stroke-opacity="0.85"/>
+    <!-- Left knobs -->
+    <circle cx="22" cy="26" r="8"   fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.4" stroke-opacity="0.85"/>
+    <circle cx="28" cy="19" r="5.5" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.4" stroke-opacity="0.85"/>
+    <circle cx="28" cy="33" r="5.5" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.4" stroke-opacity="0.85"/>
+    <!-- Right knobs -->
+    <circle cx="82" cy="26" r="8"   fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.4" stroke-opacity="0.85"/>
+    <circle cx="76" cy="19" r="5.5" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.4" stroke-opacity="0.85"/>
+    <circle cx="76" cy="33" r="5.5" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.4" stroke-opacity="0.85"/>
+  </g>
+  <!-- Bone ambient glow -->
+  <circle cx="52" cy="24" r="24" fill="#f59e0b" opacity="0.04" filter="url(#dg-glow-lg)"/>
+  <!-- Motion lines — bone trailing from the left -->
+  <line x1="2"  y1="18" x2="14" y2="20" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" opacity="0.38"/>
+  <line x1="2"  y1="26" x2="12" y2="26" stroke="#f59e0b" stroke-width="1"   stroke-linecap="round" opacity="0.25"/>
+  <line x1="4"  y1="33" x2="14" y2="31" stroke="#f59e0b" stroke-width="1"   stroke-linecap="round" opacity="0.18"/>
+
+  <!-- TAIL (raised and wagging — excited) -->
+  <rect x="152" y="142" width="12" height="36" rx="6"
+        fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.55"
+        transform="rotate(32 158 160)"/>
+  <circle cx="173" cy="135" r="5"  fill="#f59e0b" opacity="0.72" filter="url(#dg-glow)"/>
+  <circle cx="173" cy="135" r="11" fill="#f59e0b" opacity="0.05" filter="url(#dg-glow-lg)"/>
+
+  <!-- BACK LEGS -->
+  <rect x="36"  y="211" width="26" height="38" rx="9" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.28"/>
+  <rect x="138" y="211" width="26" height="38" rx="9" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.28"/>
+  <!-- Back feet -->
+  <rect x="28"  y="241" width="38" height="12" rx="6" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.28"/>
+  <rect x="134" y="241" width="38" height="12" rx="6" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.28"/>
+
+  <!-- BODY -->
+  <rect x="32" y="152" width="136" height="66" rx="14" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="54" y1="172" x2="146" y2="172" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.08"/>
+  <!-- Progress bar -->
+  <rect x="54" y="183" width="92" height="6" rx="3" fill="#f59e0b" opacity="0.08"/>
+  <rect x="54" y="183" width="58" height="6" rx="3" fill="#f59e0b" opacity="0.45"/>
+  <!-- Status LEDs -->
+  <circle cx="58" cy="197" r="4" fill="#10b981" opacity="0.7" filter="url(#dg-glow)"/>
+  <circle cx="71" cy="197" r="4" fill="#f59e0b" opacity="0.7" filter="url(#dg-glow)"/>
+
+  <!-- FRONT LEGS (left one slightly raised — jumping for the bone) -->
+  <rect x="58"  y="207" width="26" height="36" rx="9"
+        fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.28"
+        transform="rotate(-12 71 225)"/>
+  <rect x="116" y="210" width="26" height="38" rx="9" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.28"/>
+  <!-- Front right foot -->
+  <rect x="108" y="240" width="36" height="12" rx="6" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.28"/>
+
+  <!-- NECK -->
+  <rect x="76" y="132" width="48" height="23" rx="7" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.22"/>
+
+  <!-- HEAD -->
+  <rect x="28" y="56" width="144" height="82" rx="18" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.52"/>
+  <rect x="30" y="58" width="140" height="78" rx="17" fill="#f59e0b" opacity="0.015"/>
+
+  <!-- Ear bolts (sides of head) -->
+  <circle cx="28"  cy="96" r="7" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.45"/>
+  <circle cx="172" cy="96" r="7" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.45"/>
+
+  <!-- EARS (on top) -->
+  <rect x="44"  y="38" width="18" height="22" rx="5" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.45"/>
+  <rect x="138" y="38" width="18" height="22" rx="5" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.45"/>
+
+  <!-- EYES — both pupils shifted up-left, tracking the incoming bone -->
+  <!-- Left eye socket -->
+  <rect x="40" y="68" width="52" height="38" rx="10" fill="#080c14"/>
+  <circle cx="66" cy="87" r="14" fill="url(#dg-eye)" opacity="0.38"/>
+  <circle cx="66" cy="87" r="9"  fill="#f59e0b"       opacity="0.22"/>
+  <circle cx="60" cy="81" r="7"  fill="#f59e0b"       opacity="0.85" filter="url(#dg-glow)"/>
+  <circle cx="60" cy="81" r="3"  fill="#ffffff"/>
+  <circle cx="58" cy="79" r="1.5" fill="#ffffff"      opacity="0.78"/>
+
+  <!-- Right eye socket -->
+  <rect x="108" y="68" width="52" height="38" rx="10" fill="#080c14"/>
+  <circle cx="134" cy="87" r="14" fill="url(#dg-eye)" opacity="0.38"/>
+  <circle cx="134" cy="87" r="9"  fill="#f59e0b"       opacity="0.22"/>
+  <circle cx="128" cy="81" r="7"  fill="#f59e0b"       opacity="0.85" filter="url(#dg-glow)"/>
+  <circle cx="128" cy="81" r="3"  fill="#ffffff"/>
+  <circle cx="126" cy="79" r="1.5" fill="#ffffff"      opacity="0.78"/>
+
+  <!-- Eyebrows (raised high — max excitement) -->
+  <path d="M 42 63 Q 66 51 90 63"   stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.88"/>
+  <path d="M 110 63 Q 134 51 158 63" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.88"/>
+
+  <!-- SNOUT -->
+  <rect x="62" y="106" width="76" height="28" rx="10" fill="url(#dg-body)" stroke="#f59e0b" stroke-width="1.2" stroke-opacity="0.4"/>
+  <!-- Nose dots -->
+  <circle cx="88"  cy="116" r="3.5" fill="#f59e0b" opacity="0.5"/>
+  <circle cx="112" cy="116" r="3.5" fill="#f59e0b" opacity="0.5"/>
+  <!-- Tongue (excited — sticking out) -->
+  <path d="M 80 132 Q 100 150 120 132" stroke="#fb923c" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.88"/>
+
+  <!-- Floating label -->
+  <text x="156" y="80" font-family="monospace" font-size="9" fill="#f59e0b" opacity="0.28">woof</text>
+</svg>

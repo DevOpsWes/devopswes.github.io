@@ -18,10 +18,68 @@
 .site-intro-container {
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: $sp-6;
+  align-items: center;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
+.site-intro-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: $sp-4;
+  text-align: center;
+}
+
+.site-intro-robot {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  @media (max-width: 900px) { display: none; }
+}
+
+.site-intro-dog {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+
+  @media (max-width: 900px) { display: none; }
+}
+
+.site-bot {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  filter: drop-shadow(0 0 24px rgba($accent, 0.18));
+
+  [data-theme="light"] & { filter: drop-shadow(0 0 20px rgba($accent-alt, 0.15)); }
+}
+
+.site-dog {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba($accent, 0.15));
+
+  [data-theme="light"] & { filter: drop-shadow(0 0 16px rgba($accent-alt, 0.12)); }
+}
+
+@keyframes float-alt {
+  0%, 100% { transform: translateY(-8px); }
+  50%       { transform: translateY(6px); }
+}
+
+.floating-alt {
+  animation: float-alt 5.5s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) { animation: none; }
 }
 
 .site-intro-badge {
