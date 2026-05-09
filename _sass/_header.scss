@@ -31,6 +31,7 @@
   align-items: center;
   justify-content: space-between;
   gap: $sp-6;
+  position: relative; // anchor for absolutely-centered nav-links
 
   @media (max-width: 640px) { padding: 0 $sp-4; }
 }
@@ -60,11 +61,15 @@
 }
 .logo-name { color: var(--text); }
 
-// Desktop nav links
+// Desktop nav links — absolutely centered so logo/button widths don't affect position
 .nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: $sp-8;
+  pointer-events: auto;
 
   @media (max-width: 768px) { display: none; }
 }
