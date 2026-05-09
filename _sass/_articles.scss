@@ -180,7 +180,7 @@
   color: $accent;
   background: rgba($accent, 0.1);
   border: 1px solid rgba($accent, 0.2);
-  border-radius: $r-full;
+  border-radius: 9999px;
   padding: 2px $sp-3;
   text-decoration: none;
   transition: background $t-fast, border-color $t-fast;
