@@ -65,6 +65,13 @@
   #rb-anim-toggle { display: none; }
 }
 
+/* Hidden on non-home pages — visibility:hidden preserves the space so nav-links
+   stay centered consistently across all pages */
+.rb-anim-toggle--hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* ── Hide entire stage on very narrow viewports ──────────────────────────────── */
 @media (max-width: 640px) {
   .rb-doghero-stage {
