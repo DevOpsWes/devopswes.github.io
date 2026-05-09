@@ -60,6 +60,11 @@
 #rb-anim-toggle[data-paused="true"] .rb-icon-play  { display: block; }
 #rb-anim-toggle[data-paused="true"] .rb-icon-pause { display: none; }
 
+/* Hide on mobile — animation is not shown below the breakpoint */
+@media (max-width: 640px) {
+  #rb-anim-toggle { display: none; }
+}
+
 /* ── Hide entire stage on very narrow viewports ──────────────────────────────── */
 @media (max-width: 640px) {
   .rb-doghero-stage {
