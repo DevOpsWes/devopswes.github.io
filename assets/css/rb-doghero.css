@@ -54,6 +54,12 @@
   transform-origin: 50% 0%;
 }
 
+/* ── Animation pause/play toggle button (home page nav) ─────────────────────── */
+#rb-anim-toggle .rb-icon-play  { display: none; }
+#rb-anim-toggle .rb-icon-pause { display: block; }
+#rb-anim-toggle[data-paused="true"] .rb-icon-play  { display: block; }
+#rb-anim-toggle[data-paused="true"] .rb-icon-pause { display: none; }
+
 /* ── Hide entire stage on very narrow viewports ──────────────────────────────── */
 @media (max-width: 640px) {
   .rb-doghero-stage {

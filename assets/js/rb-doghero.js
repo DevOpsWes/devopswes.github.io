@@ -746,6 +746,32 @@
   // Use window load (after fonts paint) for reliable getBoundingClientRect()
   function boot() {
     try { init(); } catch (err) { console.error('[rb-doghero] init failed:', err); }
+
+    // Wire pause/play toggle button (only present on home page)
+    var btn = document.getElementById('rb-anim-toggle');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        if (!initComplete) return;
+
+        if (running) {
+          // ── Pause ──
+          running = false;
+          cancelAll();
+          staticPose();
+          btn.setAttribute('data-paused', 'true');
+          btn.setAttribute('aria-label', 'Play animation');
+          btn.title = 'Play animation';
+        } else {
+          // ── Resume ──
+          place();   // reset to clean initial positions
+          running = true;
+          runLoop();
+          btn.setAttribute('data-paused', 'false');
+          btn.setAttribute('aria-label', 'Pause animation');
+          btn.title = 'Pause animation';
+        }
+      });
+    }
   }
 
   if (document.readyState === 'complete') {
