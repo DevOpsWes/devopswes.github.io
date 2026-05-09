@@ -14,7 +14,7 @@
 
     // Display sizes (px) at scaleDesktop = 1.0 — match SVG viewBox dimensions
     rW: 80,  rH: 112,   // robot
-    dW: 78,  dH: 88,    // dog
+    dW: 96,  dH: 88,    // dog (wider viewBox to show full tail)
     bW: 44,  bH: 20,    // bone
 
     // Robot arm geometry (in viewBox units, pivot = shoulder = arm-group top-center)
@@ -25,6 +25,10 @@
     // Robot hand center at THROW pose (viewBox units):
     // shoulder(67,56) + 44px * sin(68°), cos(68°) ≈ (67+40.8, 56+16.5) = (108, 72)
     handThrowVX: 108,  handThrowVY: 72,
+
+    // Robot hand center at REST pose (viewBox units) — arm hangs at armRest=15°
+    // pivot(67,56) + 49px*sin(15°), 49px*cos(15°) ≈ (67+12.7, 56+47.3) = (80, 103)
+    handRestVX: 80,  handRestVY: 103,
 
     // Dog mouth center (left tip of snout) in dog viewBox units
     mouthVX: 3,  mouthVY: 32,
@@ -50,7 +54,7 @@
   };
 
   // ─── PHASE DURATIONS (ms) ──────────────────────────────────────────────────
-  // Total loop ≈ 5 000 ms
+  // Total loop ≈ 5 200 ms
   var PH = {
     windUp    : 390,   // arm pulls back
     snapDelay :  80,   // ms after snap starts before bone launches
@@ -58,13 +62,13 @@
     flight    : 830,   // bone in the air  (snap+snapDelay+flight = 1140; +windUp = 1530)
     armReturn : 340,   // arm drifts back to rest (concurrent with flight)
     catch_    : 480,   // dog bounce + tail wag
-    runDrop   : 180,   // dog drops to below-title run path
-    run       : 1360,  // dog crosses under title right→left
-    handoff   : 460,   // pause + bone hides
-    dogFade   : 170,   // dog fades out before repositioning
-    dogFadeIn : 190,   // dog fades back in at idle
-    idle      : 780,   // pause before next throw
-    // Total: 1530 + 480 + (180+1360) + (460+170+190+780) ≈ 5150 ms
+    runDrop   : 180,   // dog drops to / rises from the below-title run path
+    run       : 1360,  // dog crosses under title right→left (return trip)
+    armExtend : 320,   // robot extends arm to receive bone from dog
+    handoff   : 200,   // brief pause at robot — visual "bone transfer" moment
+    runBack   : 800,   // dog runs back left→right (faster than outward trip)
+    idle      : 300,   // pause before next throw (bone visible in robot hand)
+    // Approximate total: 1300(throw)+480(catch)+1540(return)+1620(handoff) ≈ 4940 ms
   };
 
   // ─── SVG HELPERS ───────────────────────────────────────────────────────────
@@ -166,10 +170,11 @@
   }
 
   // ─── SVG ART: DOG ──────────────────────────────────────────────────────────
-  // viewBox 0 0 78 88  |  facing LEFT (snout at low-x, tail at high-x)
+  // viewBox 0 0 96 88  |  facing LEFT (snout at low-x, tail at high-x)
+  // Body occupies x=46-74; front legs hang from body front (x≈47-68); tail extends to x≈88
   function buildDog() {
     var wrap = document.createElement('div');
-    wrap.innerHTML = '<svg viewBox="0 0 78 88" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;display:block">'
+    wrap.innerHTML = '<svg viewBox="0 0 96 88" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;display:block">'
       + '<defs><filter id="rbd-g" x="-60%" y="-60%" width="220%" height="220%">'
       + '<feGaussianBlur stdDeviation="2.2" result="bl"/>'
       + '<feMerge><feMergeNode in="bl"/><feMergeNode in="SourceGraphic"/></feMerge>'
@@ -198,7 +203,7 @@
       + '<rect x="35" y="16" width="14" height="11" rx="4" fill="#080c14"/>'
       + '<circle cx="39" cy="21" r="4.5" fill="#10b981" filter="url(#rbd-g)"/>'
       + '<circle cx="41" cy="18" r="1.5" fill="#ffffff"/>'
-      // Neck
+      // Neck — connects head to body
       + '<rect x="50" y="30" width="10" height="12" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
       // Body
       + '<rect x="46" y="40" width="28" height="28" rx="8" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
@@ -206,26 +211,26 @@
       + '<rect x="51" y="50" width="18" height="4" rx="2" fill="#080c14" opacity="0.3"/>'
       + '<rect x="51" y="50" width="11" height="4" rx="2" fill="#10b981" opacity="0.9"/>'
       + '<circle cx="53" cy="62" r="2.5" fill="#10b981" filter="url(#rbd-g)"/>'
-      // Tail
+      // Tail — extends beyond body to the right (needs viewBox width ≥ 96)
       + '<g class="rb-dog-tail">'
       + '<path d="M 72 46 C 80 36 88 26 82 16" stroke="#f59e0b" stroke-width="6" stroke-linecap="round" fill="none"/>'
       + '<path d="M 72 46 C 80 36 88 26 82 16" stroke="#080c14" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>'
       + '</g>'
-      // Front legs
+      // Front legs — attached to front of body (x≈47-68)
       + '<g class="rb-dog-frontlegs">'
-      + '<rect x="22" y="60" width="10" height="22" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
-      + '<rect x="34" y="60" width="10" height="22" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="47" y="62" width="11" height="18" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="59" y="62" width="11" height="18" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
       + '</g>'
-      // Back legs
+      // Back legs — at rear of body (x≈60-74)
       + '<g class="rb-dog-backlegs">'
       + '<rect x="50" y="66" width="10" height="16" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
       + '<rect x="62" y="66" width="10" height="16" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
       + '</g>'
-      // Feet
-      + '<rect x="16" y="78" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
-      + '<rect x="28" y="78" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
-      + '<rect x="44" y="78" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
-      + '<rect x="56" y="78" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      // Feet — 4 paws under the body
+      + '<rect x="41" y="77" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="53" y="77" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="44" y="79" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="56" y="79" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
       // Carry-bone (off-white, visible on dark background)
       + '<g class="rb-carry-bone" opacity="0">'
       + '<rect x="5" y="29" width="16" height="6" rx="3" fill="#f0f0f0" stroke="#080c14" stroke-width="1.2"/>'
@@ -356,6 +361,10 @@
     var handX = robotX + Cfg.handThrowVX * s;
     var handY = robotY + Cfg.handThrowVY * s;
 
+    // Robot hand at REST pose (arm hanging down at armRest angle)
+    var handRestX = robotX + Cfg.handRestVX * s;
+    var handRestY = robotY + Cfg.handRestVY * s;
+
     // Dog mouth (centre of bone catch point)
     var mouthX = dogIdleX + Cfg.mouthVX * s;
     var mouthY = dogIdleY + Cfg.mouthVY * s;
@@ -374,6 +383,7 @@
       robotX:robotX, robotY:robotY,
       dogIdleX:dogIdleX, dogIdleY:dogIdleY,
       handX:handX, handY:handY,
+      handRestX:handRestX, handRestY:handRestY,
       mouthX:mouthX, mouthY:mouthY,
       arcCX:arcCX, arcCY:arcCY,
       runY:runY, runStartX:runStartX, runEndX:runEndX,
@@ -431,6 +441,9 @@
 
   async function throwPhase() {
     var g = geo;
+
+    // Hide bone from robot's hand — it's about to be thrown
+    boneDiv.style.opacity = '0';
 
     // 1. Wind-up: arm pulls back
     await go(robotEls.arm,
@@ -540,32 +553,71 @@
   }
 
   async function handoffPhase() {
-    // Dog arrived near robot — hide carry-bone and tongue
+    var g = geo;
+
+    // 1. Robot sees the dog and extends arm to receive the bone
+    await go(robotEls.arm,
+      [{ transform: 'rotate(' + Cfg.armRest  + 'deg)' },
+       { transform: 'rotate(' + Cfg.armThrow + 'deg)' }],
+      { duration: PH.armExtend, easing: 'ease-out' });
+
+    // 2. Visual bone transfer: switch from dog carry-bone to boneDiv in robot's hand
     dogEls.carryBone.setAttribute('opacity', '0');
     dogEls.tongue.setAttribute('opacity', '0');
+    boneDiv.style.transform =
+      'translate(' + (g.handX - g.bW/2) + 'px,' + (g.handY - g.bH/2) + 'px)';
+    boneDiv.style.opacity = '1';
 
-    // Brief pause at the robot
+    // Brief pause so the handoff is visible
     await wait(PH.handoff);
 
-    // Dog fades out
+    // 3. Robot arm returns to rest (holding bone) — concurrent with dog running back
+    var armRestDone = go(robotEls.arm,
+      [{ transform: 'rotate(' + Cfg.armThrow + 'deg)' },
+       { transform: 'rotate(' + Cfg.armRest  + 'deg)' }],
+      { duration: PH.armExtend, easing: 'ease-in-out' });
+
+    // 4. Dog flips to face right (scaleX(-1)) and runs back left→right under title
+    var runBackStart = 'translate(' + g.runEndX   + 'px,' + g.runY + 'px) scaleX(-1)';
+    var runBackEnd   = 'translate(' + g.runStartX + 'px,' + g.runY + 'px) scaleX(-1)';
+
+    // Set starting transform before animating (dog is already at runEndX,runY from returnPhase)
+    dogDiv.style.transform = runBackStart;
+
+    var runBackDone = go(dogDiv,
+      [{ transform: runBackStart }, { transform: runBackEnd }],
+      { duration: PH.runBack, easing: 'ease-in-out' });
+
+    var legKf = [
+      { transform: 'rotate(0deg)'   }, { transform: 'rotate(20deg)'  },
+      { transform: 'rotate(0deg)'   }, { transform: 'rotate(-20deg)' },
+      { transform: 'rotate(0deg)'   }, { transform: 'rotate(20deg)'  },
+      { transform: 'rotate(0deg)'   }, { transform: 'rotate(-20deg)' },
+      { transform: 'rotate(0deg)'   }
+    ];
+    var flDone = go(dogEls.fl, legKf,                   { duration: PH.runBack, easing: 'linear' });
+    var blDone = go(dogEls.bl, legKf.slice().reverse(), { duration: PH.runBack, easing: 'linear' });
+
+    await Promise.all([armRestDone, runBackDone, flDone, blDone]);
+
+    // 5. Dog rises from run-path back up to idle position (still flipped)
     await go(dogDiv,
-      [{ opacity: '1' }, { opacity: '0' }],
-      { duration: PH.dogFade, easing: 'ease-in' });
+      [{ transform: runBackEnd },
+       { transform: 'translate(' + g.dogIdleX + 'px,' + g.dogIdleY + 'px) scaleX(-1)' }],
+      { duration: PH.runDrop, easing: 'ease-out' });
 
-    // Instantly reposition dog to idle (right side of title) — invisible so no flicker
-    dogDiv.style.transform = 'translate(' + geo.dogIdleX + 'px,' + geo.dogIdleY + 'px)';
-
-    // Reset leg and tail transforms
+    // 6. Snap dog back to face-left pose; reset leg/tail transforms
+    dogDiv.style.transform = 'translate(' + g.dogIdleX + 'px,' + g.dogIdleY + 'px)';
     dogEls.fl.style.transform   = '';
     dogEls.bl.style.transform   = '';
     dogEls.tail.style.transform = '';
 
-    // Dog fades back in
-    await go(dogDiv,
-      [{ opacity: '0' }, { opacity: '1' }],
-      { duration: PH.dogFadeIn, easing: 'ease-out' });
+    // 7. Move boneDiv to rest-pose position (arm is now at rest angle)
+    boneDiv.style.transform =
+      'translate(' + (g.handRestX - g.bW/2) + 'px,' + (g.handRestY - g.bH/2) + 'px)';
+    // boneDiv stays visible — robot holds the bone during idle
 
-    // Final idle pause before next throw
+    // 8. Idle pause before next throw
     await wait(PH.idle);
   }
 
@@ -586,10 +638,10 @@
   // ─── REDUCED MOTION ────────────────────────────────────────────────────────
   function staticPose() {
     var g = geo;
-    // Robot arm at rest, bone visible in hand
+    // Robot arm at rest, bone visible in hand at rest position
     robotEls.arm.style.transform = 'rotate(' + Cfg.armRest + 'deg)';
     boneDiv.style.transform =
-      'translate(' + (g.handX - g.bW/2) + 'px,' + (g.handY - g.bH/2) + 'px)';
+      'translate(' + (g.handRestX - g.bW/2) + 'px,' + (g.handRestY - g.bH/2) + 'px)';
     boneDiv.style.opacity = '0.85';
     // Dog in idle position, tail slightly raised
     dogDiv.style.transform = 'translate(' + g.dogIdleX + 'px,' + g.dogIdleY + 'px)';
