@@ -1,4 +1,4 @@
-/* global rb-doghero animation — isolated IIFE, no global scope pollution */
+﻿/* global rb-doghero animation — isolated IIFE, no global scope pollution */
 (function () {
   'use strict';
 
@@ -34,19 +34,19 @@
     scaleMobile  : 0.72,
     mobileBreak  : 640,   // px — matches CSS breakpoint that hides stage
 
-    // Brand colours (aligned with site design tokens)
+    // Brand colours — chosen for visibility on #080c14 dark background
     col: {
-      b  : '#111827',   // body dark
-      ba : '#1a2235',   // body alt
-      ac : '#f59e0b',   // amber accent
+      b  : '#1a3a6c',   // body: medium navy blue (visible on near-black bg)
+      ba : '#122952',   // body gradient end: deeper navy
+      ac : '#f59e0b',   // amber accent (brand)
       or : '#fb923c',   // orange (tongue, warm glow)
-      wh : '#ffffff',   // white glints
+      wh : '#e8f4f8',   // white glints (slightly blue-tinted)
       gr : '#10b981',   // green LED
-      dk : '#080c14',   // deepest dark (eye sockets, bone fill)
+      dk : '#c4922a',   // bone fill: golden amber (was '#080c14' — invisible!)
     },
 
     zIndex : 20,
-    debug  : true,
+    debug  : false,
   };
 
   // ─── PHASE DURATIONS (ms) ──────────────────────────────────────────────────
@@ -132,7 +132,7 @@
 
     // Head
     svg.appendChild(svgEl('rect', { x:'16', y:'8', width:'48', height:'38', rx:'10',
-      fill:bf, stroke:C.ac, 'stroke-width':'1.5', 'stroke-opacity':'0.55' }));
+      fill:bf, stroke:C.ac, 'stroke-width':'1.5', 'stroke-opacity':'0.90' }));
 
     // Left eye socket + iris + glint
     append(svg,
@@ -162,11 +162,11 @@
 
     // Neck
     svg.appendChild(svgEl('rect', { x:'30', y:'46', width:'20', height:'8', rx:'4',
-      fill:bf, stroke:C.ac, 'stroke-width':'1', 'stroke-opacity':'0.25' }));
+      fill:bf, stroke:C.ac, 'stroke-width':'1', 'stroke-opacity':'0.55' }));
 
     // Body
     svg.appendChild(svgEl('rect', { x:'13', y:'52', width:'54', height:'42', rx:'8',
-      fill:bf, stroke:C.ac, 'stroke-width':'1.5', 'stroke-opacity':'0.45' }));
+      fill:bf, stroke:C.ac, 'stroke-width':'1.5', 'stroke-opacity':'0.80' }));
 
     // Chest panel — progress bar
     append(svg,
@@ -185,9 +185,9 @@
     // Left arm (static)
     append(svg,
       svgEl('rect',   { x:'3',  y:'54', width:'12', height:'28', rx:'6',
-                        fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.3' }),
+                        fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.65' }),
       svgEl('circle', { cx:'9', cy:'86', r:'7',
-                        fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.3' })
+                        fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.65' })
     );
 
     // RIGHT (throwing) arm — class drives CSS transform-box + transform-origin
@@ -195,9 +195,9 @@
     var arm = svgEl('g', { class:'rb-robot-arm' });
     append(arm,
       svgEl('rect',   { x:'61', y:'56', width:'12', height:'24', rx:'6',
-                        fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.4' }),
+                        fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.75' }),
       svgEl('rect',   { x:'63', y:'78', width:'10', height:'18', rx:'5',
-                        fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.35' }),
+                        fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.70' }),
       svgEl('circle', { cx:'68', cy:'98', r:'7',
                         fill:bf, stroke:C.ac, 'stroke-width':'1.3', 'stroke-opacity':'0.5' })
     );
@@ -206,17 +206,17 @@
     // Legs
     append(svg,
       svgEl('rect', { x:'23', y:'92', width:'14', height:'16', rx:'6',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.3' }),
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.65' }),
       svgEl('rect', { x:'43', y:'92', width:'14', height:'16', rx:'6',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.3' })
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.65' })
     );
 
     // Feet
     append(svg,
       svgEl('rect', { x:'18', y:'105', width:'22', height:'7', rx:'3.5',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.28' }),
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.60' }),
       svgEl('rect', { x:'40', y:'105', width:'22', height:'7', rx:'3.5',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.28' })
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.60' })
     );
 
     return { svg:svg, arm:arm, wink:wink };
@@ -238,7 +238,7 @@
 
     // Snout — protrudes left (this is the bone-catch point)
     svg.appendChild(svgEl('rect', { x:'0', y:'24', width:'24', height:'16', rx:'7',
-      fill:bf, stroke:C.ac, 'stroke-width':'1.3', 'stroke-opacity':'0.45' }));
+      fill:bf, stroke:C.ac, 'stroke-width':'1.3', 'stroke-opacity':'0.80' }));
 
     // Nose
     svg.appendChild(svgEl('circle', { cx:'3', cy:'32', r:'3.5',
@@ -261,15 +261,15 @@
 
     // Head
     svg.appendChild(svgEl('rect', { x:'16', y:'10', width:'38', height:'32', rx:'9',
-      fill:bf, stroke:C.ac, 'stroke-width':'1.5', 'stroke-opacity':'0.52' }));
+      fill:bf, stroke:C.ac, 'stroke-width':'1.5', 'stroke-opacity':'0.90' }));
 
     // Ears (slightly tilted outward)
     append(svg,
       svgEl('rect', { x:'20', y:'1',  width:'10', height:'14', rx:'5',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.3', 'stroke-opacity':'0.45',
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.3', 'stroke-opacity':'0.80',
                       transform:'rotate(-9,25,8)' }),
       svgEl('rect', { x:'36', y:'1',  width:'10', height:'14', rx:'5',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.3', 'stroke-opacity':'0.45',
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.3', 'stroke-opacity':'0.80',
                       transform:'rotate(9,41,8)' })
     );
 
@@ -299,11 +299,11 @@
 
     // Neck
     svg.appendChild(svgEl('rect', { x:'50', y:'30', width:'10', height:'12', rx:'4',
-      fill:bf, stroke:C.ac, 'stroke-width':'1', 'stroke-opacity':'0.25' }));
+      fill:bf, stroke:C.ac, 'stroke-width':'1', 'stroke-opacity':'0.55' }));
 
     // Body
     svg.appendChild(svgEl('rect', { x:'46', y:'40', width:'28', height:'28', rx:'8',
-      fill:bf, stroke:C.ac, 'stroke-width':'1.5', 'stroke-opacity':'0.45' }));
+      fill:bf, stroke:C.ac, 'stroke-width':'1.5', 'stroke-opacity':'0.80' }));
 
     // Chest panel
     append(svg,
@@ -333,9 +333,9 @@
     var fl = svgEl('g', { class:'rb-dog-frontlegs' });
     append(fl,
       svgEl('rect', { x:'22', y:'60', width:'10', height:'22', rx:'5',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.3' }),
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.65' }),
       svgEl('rect', { x:'34', y:'60', width:'10', height:'22', rx:'5',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.3' })
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.65' })
     );
     svg.appendChild(fl);
 
@@ -343,22 +343,22 @@
     var bl = svgEl('g', { class:'rb-dog-backlegs' });
     append(bl,
       svgEl('rect', { x:'50', y:'66', width:'10', height:'16', rx:'5',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.3' }),
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.65' }),
       svgEl('rect', { x:'62', y:'66', width:'10', height:'16', rx:'5',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.3' })
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.65' })
     );
     svg.appendChild(bl);
 
     // Feet (four)
     append(svg,
       svgEl('rect', { x:'16', y:'78', width:'18', height:'8', rx:'4',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.28' }),
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.60' }),
       svgEl('rect', { x:'28', y:'78', width:'18', height:'8', rx:'4',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.28' }),
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.60' }),
       svgEl('rect', { x:'44', y:'78', width:'18', height:'8', rx:'4',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.28' }),
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.60' }),
       svgEl('rect', { x:'56', y:'78', width:'18', height:'8', rx:'4',
-                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.28' })
+                      fill:bf, stroke:C.ac, 'stroke-width':'1.2', 'stroke-opacity':'0.60' })
     );
 
     // Carry-bone (visible only while dog runs back to robot)
@@ -760,47 +760,39 @@
     // Robot
     try {
       robotEls = buildRobot();
-      console.log('[rb] buildRobot OK', robotEls);
-    } catch (e) { console.error('[rb] buildRobot FAILED:', e); return; }
+      } catch (e) { console.error('[rb] buildRobot FAILED:', e); return; }
     robotDiv = document.createElement('div');
     robotDiv.className = 'rb-doghero-robot';
     robotDiv.appendChild(robotEls.svg);
     stage.appendChild(robotDiv);
-    console.log('[rb] robotDiv in stage');
 
     // Dog
     try {
       dogEls = buildDog();
-      console.log('[rb] buildDog OK', dogEls);
-    } catch (e) { console.error('[rb] buildDog FAILED:', e); return; }
+      } catch (e) { console.error('[rb] buildDog FAILED:', e); return; }
     dogDiv = document.createElement('div');
     dogDiv.className = 'rb-doghero-dog';
     dogDiv.appendChild(dogEls.svg);
     stage.appendChild(dogDiv);
-    console.log('[rb] dogDiv in stage');
 
     // Bone
     var boneSvg;
     try {
       boneSvg = buildBone();
-      console.log('[rb] buildBone OK');
-    } catch (e) { console.error('[rb] buildBone FAILED:', e); return; }
+      } catch (e) { console.error('[rb] buildBone FAILED:', e); return; }
     boneDiv = document.createElement('div');
     boneDiv.className = 'rb-doghero-bone';
     boneDiv.appendChild(boneSvg);
     stage.appendChild(boneDiv);
-    console.log('[rb] boneDiv in stage');
 
     // Initial geometry + placement
     try {
       measure();
-      console.log('[rb] measure OK, geo:', JSON.stringify(geo));
-    } catch (e) { console.error('[rb] measure FAILED:', e); return; }
+      } catch (e) { console.error('[rb] measure FAILED:', e); return; }
 
     try {
       place();
-      console.log('[rb] place OK');
-    } catch (e) { console.error('[rb] place FAILED:', e); return; }
+      } catch (e) { console.error('[rb] place FAILED:', e); return; }
 
     initComplete = true;   // guard flag so resize handler knows we're ready
 
@@ -811,7 +803,6 @@
 
     running = true;
     runLoop();
-    console.log('[rb] runLoop started');
   }
 
   // ─── RESIZE ────────────────────────────────────────────────────────────────
