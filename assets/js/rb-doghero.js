@@ -451,6 +451,7 @@
   var geo = {};
   var running = false;
   var prefersReduced = false;
+  var initComplete = false;
 
   // ─── MEASURE ───────────────────────────────────────────────────────────────
   function measure() {
@@ -735,10 +736,10 @@
   // ─── INIT ──────────────────────────────────────────────────────────────────
   function init() {
     var title = document.querySelector(Cfg.titleSelector);
-    if (!title) return;
+    if (!title) { console.warn('[rb] no #page-title found'); return; }
 
     var wrapper = title.closest('.' + Cfg.wrapperClass);
-    if (!wrapper) return;
+    if (!wrapper) { console.warn('[rb] no .rb-doghero wrapper found'); return; }
 
     prefersReduced =
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -757,28 +758,51 @@
     wrapper.appendChild(stage);
 
     // Robot
+    try {
+      robotEls = buildRobot();
+      console.log('[rb] buildRobot OK', robotEls);
+    } catch (e) { console.error('[rb] buildRobot FAILED:', e); return; }
     robotDiv = document.createElement('div');
     robotDiv.className = 'rb-doghero-robot';
-    robotEls = buildRobot();
     robotDiv.appendChild(robotEls.svg);
     stage.appendChild(robotDiv);
+    console.log('[rb] robotDiv in stage');
 
     // Dog
+    try {
+      dogEls = buildDog();
+      console.log('[rb] buildDog OK', dogEls);
+    } catch (e) { console.error('[rb] buildDog FAILED:', e); return; }
     dogDiv = document.createElement('div');
     dogDiv.className = 'rb-doghero-dog';
-    dogEls = buildDog();
     dogDiv.appendChild(dogEls.svg);
     stage.appendChild(dogDiv);
+    console.log('[rb] dogDiv in stage');
 
     // Bone
+    var boneSvg;
+    try {
+      boneSvg = buildBone();
+      console.log('[rb] buildBone OK');
+    } catch (e) { console.error('[rb] buildBone FAILED:', e); return; }
     boneDiv = document.createElement('div');
     boneDiv.className = 'rb-doghero-bone';
-    boneDiv.appendChild(buildBone());
+    boneDiv.appendChild(boneSvg);
     stage.appendChild(boneDiv);
+    console.log('[rb] boneDiv in stage');
 
     // Initial geometry + placement
-    measure();
-    place();
+    try {
+      measure();
+      console.log('[rb] measure OK, geo:', JSON.stringify(geo));
+    } catch (e) { console.error('[rb] measure FAILED:', e); return; }
+
+    try {
+      place();
+      console.log('[rb] place OK');
+    } catch (e) { console.error('[rb] place FAILED:', e); return; }
+
+    initComplete = true;   // guard flag so resize handler knows we're ready
 
     if (prefersReduced) {
       staticPose();
@@ -787,6 +811,7 @@
 
     running = true;
     runLoop();
+    console.log('[rb] runLoop started');
   }
 
   // ─── RESIZE ────────────────────────────────────────────────────────────────
@@ -794,7 +819,7 @@
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
-      if (!stage) return;
+      if (!initComplete) return;   // don't run if init() never completed
       running = false;
       cancelAll();
       measure();
