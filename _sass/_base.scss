@@ -49,6 +49,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: clip; // prevent animation stage horizontal overflow from shifting layout
   transition: background-color $t-normal, color $t-normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
