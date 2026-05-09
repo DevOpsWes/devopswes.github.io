@@ -1,0 +1,57 @@
+---
+layout: page
+title: Articles
+permalink: /articles/
+---
+
+<div class="timeline-intro">
+  <p>A chronological archive of everything published on this blog — newest first.</p>
+</div>
+
+{% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+
+<div class="timeline" role="list">
+  {% for year_group in posts_by_year %}
+  <div class="timeline-year" role="listitem">
+    <div class="timeline-year-marker" aria-hidden="true">{{ year_group.name }}</div>
+
+    <div class="timeline-items">
+      {% for post in year_group.items %}
+      <article class="timeline-item">
+        <div class="timeline-dot" aria-hidden="true"></div>
+
+        <div class="timeline-content">
+          <time class="timeline-date" datetime="{{ post.date | date_to_xmlschema }}">
+            {{ post.date | date: "%B %-d" }}
+          </time>
+
+          <h2 class="timeline-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h2>
+
+          {% if post.description %}
+          <p class="timeline-excerpt">{{ post.description }}</p>
+          {% elsif post.excerpt %}
+          <p class="timeline-excerpt">{{ post.excerpt | strip_html | truncate: 140 }}</p>
+          {% endif %}
+
+          <div class="timeline-meta">
+            {% if post.tags and post.tags.size > 0 %}
+            <div class="timeline-tags">
+              {% for tag in post.tags limit: 4 %}
+              <a href="{{ '/tags/' | relative_url }}#{{ tag | uri_escape }}" class="timeline-tag">{{ tag }}</a>
+              {% endfor %}
+            </div>
+            {% endif %}
+
+            <a href="{{ post.url | relative_url }}" class="timeline-read-link" aria-label="Read {{ post.title }}">
+              Read &rarr;
+            </a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>

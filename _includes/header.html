@@ -7,6 +7,7 @@
     <ul class="nav-links" role="list">
       <li><a href="{{ '/' | relative_url }}" class="nav-link{% if page.url == '/' %} active{% endif %}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a></li>
       <li><a href="{{ '/about' | relative_url }}" class="nav-link{% if page.url contains 'about' %} active{% endif %}" {% if page.url contains 'about' %}aria-current="page"{% endif %}>About</a></li>
+      <li><a href="{{ '/articles' | relative_url }}" class="nav-link{% if page.url contains 'articles' %} active{% endif %}" {% if page.url contains 'articles' %}aria-current="page"{% endif %}>Articles</a></li>
       <li><a href="{{ '/tags' | relative_url }}" class="nav-link{% if page.url contains 'tags' %} active{% endif %}" {% if page.url contains 'tags' %}aria-current="page"{% endif %}>Tags</a></li>
       <li><a href="{{ '/search' | relative_url }}" class="nav-link{% if page.url contains 'search' %} active{% endif %}" {% if page.url contains 'search' %}aria-current="page"{% endif %}>Search</a></li>
     </ul>
@@ -46,6 +47,7 @@
   <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation" hidden>
     <a href="{{ '/' | relative_url }}" class="mobile-nav-link">Home</a>
     <a href="{{ '/about' | relative_url }}" class="mobile-nav-link">About</a>
+    <a href="{{ '/articles' | relative_url }}" class="mobile-nav-link">Articles</a>
     <a href="{{ '/tags' | relative_url }}" class="mobile-nav-link">Tags</a>
     <a href="{{ '/search' | relative_url }}" class="mobile-nav-link">Search</a>
   </div>
