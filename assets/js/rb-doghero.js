@@ -46,7 +46,7 @@
     },
 
     zIndex : 20,
-    debug  : false,
+    debug  : true,
   };
 
   // ─── PHASE DURATIONS (ms) ──────────────────────────────────────────────────
@@ -809,10 +809,17 @@
   });
 
   // ─── BOOT ──────────────────────────────────────────────────────────────────
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+  // Use window load (after fonts paint) for reliable getBoundingClientRect()
+  function boot() {
+    try { init(); } catch (err) { console.error('[rb-doghero] init failed:', err); }
+  }
+
+  if (document.readyState === 'complete') {
+    // Page (and fonts) already fully loaded
+    boot();
   } else {
-    init();
+    // Wait for fonts to load so layout is final before measuring geometry
+    window.addEventListener('load', boot);
   }
 
 })();
