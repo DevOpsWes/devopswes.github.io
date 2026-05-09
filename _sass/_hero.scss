@@ -5,27 +5,40 @@
 .site-intro {
   position: relative;
   overflow: hidden;
-  padding: $sp-12 0 $sp-12;
   border-bottom: 1px solid var(--border);
-  text-align: center;
 
-  // Reuse the same dot-grid bg as the old hero (class .hero-bg is shared)
   .hero-bg { opacity: 0.6; }
-
-  @media (max-width: 640px) { padding: $sp-8 0; }
 }
 
-.site-intro-container {
+// Full-width SVG scene — its aspect ratio (1000×300) drives the section height
+.scene-wrap {
   position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: $sp-6;
-  align-items: center;
+  z-index: 0;
 
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-    justify-items: center;
+  @media (max-width: 640px) { display: none; }
+}
+
+.scene-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Title text is absolutely centred over the scene on desktop,
+// falls back to normal block flow on mobile (scene is hidden)
+.site-intro-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+
+  @media (max-width: 640px) {
+    position: static;
+    padding: $sp-8 0;
+    pointer-events: auto;
   }
 }
 
@@ -35,51 +48,28 @@
   align-items: center;
   gap: $sp-4;
   text-align: center;
-}
+  pointer-events: auto;
+  max-width: 480px;
+  // Frosted glass backdrop so text reads clearly over the animated SVG
+  background: rgba(8, 12, 20, 0.58);
+  border: 1px solid rgba(245, 158, 11, 0.12);
+  border-radius: $sp-4;
+  padding: $sp-4 $sp-6;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
-.site-intro-robot {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  [data-theme="light"] & {
+    background: rgba(255, 255, 255, 0.82);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
 
-  @media (max-width: 900px) { display: none; }
-}
-
-.site-intro-dog {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-
-  @media (max-width: 900px) { display: none; }
-}
-
-.site-bot {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  filter: drop-shadow(0 0 24px rgba($accent, 0.18));
-
-  [data-theme="light"] & { filter: drop-shadow(0 0 20px rgba($accent-alt, 0.15)); }
-}
-
-.site-dog {
-  width: 100%;
-  max-width: 160px;
-  height: auto;
-  filter: drop-shadow(0 0 20px rgba($accent, 0.15));
-
-  [data-theme="light"] & { filter: drop-shadow(0 0 16px rgba($accent-alt, 0.12)); }
-}
-
-@keyframes float-alt {
-  0%, 100% { transform: translateY(-8px); }
-  50%       { transform: translateY(6px); }
-}
-
-.floating-alt {
-  animation: float-alt 5.5s ease-in-out infinite;
-
-  @media (prefers-reduced-motion: reduce) { animation: none; }
+  @media (max-width: 640px) {
+    background: none;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0 $sp-4;
+  }
 }
 
 .site-intro-badge {
@@ -108,7 +98,7 @@
   font-size: 1rem;
   color: var(--muted);
   line-height: 1.7;
-  max-width: 520px;
+  max-width: 440px;
   margin: 0;
 }
 

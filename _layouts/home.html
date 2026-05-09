@@ -4,30 +4,26 @@ layout: default
 
 <section class="site-intro" aria-label="Site introduction">
   <div class="hero-bg" aria-hidden="true"></div>
-  <div class="container site-intro-container">
 
-    <div class="site-intro-robot" aria-hidden="true">
-      <img src="{{ '/assets/images/hero-bot.svg' | relative_url }}"
-           class="site-bot floating"
-           alt="" width="240" height="284">
+  <!-- Full-width animated scene — robot throws bone, dog fetches, loops forever -->
+  <div class="scene-wrap" aria-hidden="true">
+    <img src="{{ '/assets/images/scene-animation.svg' | relative_url }}"
+         class="scene-img" alt="">
+  </div>
+
+  <!-- Title text centred over the scene (stacks below on mobile) -->
+  <div class="site-intro-overlay">
+    <div class="container">
+      <div class="site-intro-center">
+        <div class="site-intro-badge">🚀 AI &middot; DevOps &middot; Cloud &middot; Automation &middot; Virtual Desktop Environments</div>
+        <h1 class="site-intro-title">
+          Your <span class="gradient-text">Signal</span> in the <span class="gradient-text">AI Noise</span>.
+        </h1>
+        <p class="site-intro-desc">
+          Practical insights from a DevOps engineer navigating AI's transformation of infrastructure, tooling, and the job itself.
+        </p>
+      </div>
     </div>
-
-    <div class="site-intro-center">
-      <div class="site-intro-badge">🚀 AI &middot; DevOps &middot; Cloud &middot; Automation &middot; Virtual Desktop Environments</div>
-      <h1 class="site-intro-title">
-        Your <span class="gradient-text">Signal</span> in the <span class="gradient-text">AI Noise</span>.
-      </h1>
-      <p class="site-intro-desc">
-        Practical insights from a DevOps engineer navigating AI's transformation of infrastructure, tooling, and the job itself.
-      </p>
-    </div>
-
-    <div class="site-intro-dog" aria-hidden="true">
-      <img src="{{ '/assets/images/robot-dog.svg' | relative_url }}"
-           class="site-dog floating-alt"
-           alt="" width="180" height="234">
-    </div>
-
   </div>
 </section>
 
