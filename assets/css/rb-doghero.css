@@ -61,7 +61,7 @@
 #rb-anim-toggle[data-paused="true"] .rb-icon-pause { display: none; }
 
 /* Hide on mobile — animation is not shown below the breakpoint */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   #rb-anim-toggle { display: none; }
 }
 
