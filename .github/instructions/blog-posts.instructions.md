@@ -62,7 +62,7 @@ Every post **must** have a header image. Rules:
 Add to front matter:
 
 ```yaml
-image: /assets/images/posts/YYYY-MM-DD-post-slug.svg
+hero_image: /assets/images/posts/YYYY-MM-DD-post-slug.svg
 ```
 
 ## Front Matter Rules
@@ -89,11 +89,11 @@ To add a new tag, also add it to the footer topic links in `_includes/footer.htm
 
 1. **"Welcome to DevOpsWes: why I finally started writing things down"** (`2026-04-20`)
    - Introductory post. Sets tone and explains the blog's purpose. References Wesly's 20+ year career.
-   - Image: `assets/images/posts/welcome-to-devopswes.svg` (career pipeline / milestone nodes theme)
+   - Image: `assets/images/posts/welcome-to-devopswes.svg` (career pipeline / milestone nodes theme) — `hero_image:` front matter key
 
 2. **"How I used Copilot to find a VDI bug that left no errors in any log"** (`2026-04-15`)
    - Real story: ControlUp trigger captured 40 min of forensic data (Event logs, FSLogix logs, registry, installed apps) around a random Citrix DaaS issue. Used Copilot in VS Code with a structured investigation brief and a clean-baseline dataset to find the root cause: multiple Azure auth module versions loaded simultaneously, hidden in informational XML event data.
-   - Image: `assets/images/posts/ai-vdi-bug-investigation.svg` (signal-in-noise / log stream with spotlight theme)
+   - Image: `assets/images/posts/ai-vdi-bug-investigation.svg` (signal-in-noise / log stream with spotlight theme) — `hero_image:` front matter key
 
 ## Post Structure Guidance
 

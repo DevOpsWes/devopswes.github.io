@@ -2,45 +2,16 @@
 layout: default
 ---
 
-<section class="hero" aria-label="Site introduction">
+<section class="site-intro" aria-label="Site introduction">
   <div class="hero-bg" aria-hidden="true"></div>
-  <div class="container hero-container">
-    <div class="hero-content">
-      <div class="hero-badge">🚀 AI &middot; DevOps &middot; Cloud &middot; Automation &middot; Virtual Desktop Environments</div>
-      <h1 class="hero-title">
-        Your <span class="gradient-text">Signal</span><br>
-        in the <span class="gradient-text">AI Noise</span>.
-      </h1>
-      <p class="hero-subtitle">
-        AI is rewriting the rules of every job in tech — fast.
-        I'm a DevOps engineer figuring it out in real time, and I write down everything worth knowing.
-      </p>
-      <div class="hero-stats" aria-label="Blog statistics">
-        <div class="stat">
-          <span class="stat-number">{{ site.posts | size }}</span>
-          <span class="stat-label">Articles</span>
-        </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat">
-          <span class="stat-number">{{ site.tags | size }}</span>
-          <span class="stat-label">Topics</span>
-        </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat">
-          <span class="stat-number">&infin;</span>
-          <span class="stat-label">Ideas</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-decoration" aria-hidden="true">
-      <img class="hero-bot floating"
-           src="{{ '/assets/images/hero-bot.svg' | relative_url }}"
-           alt=""
-           width="380"
-           height="450">
-    </div>
-    </div>
+  <div class="container site-intro-container">
+    <div class="site-intro-badge">🚀 AI &middot; DevOps &middot; Cloud &middot; Automation &middot; Virtual Desktop Environments</div>
+    <h1 class="site-intro-title">
+      Your <span class="gradient-text">Signal</span> in the <span class="gradient-text">AI Noise</span>.
+    </h1>
+    <p class="site-intro-desc">
+      Practical insights from a DevOps engineer navigating AI's transformation of infrastructure, tooling, and the job itself.
+    </p>
   </div>
 </section>
 

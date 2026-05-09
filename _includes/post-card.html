@@ -1,4 +1,10 @@
-<article class="post-card" tabindex="0">
+<article class="post-card{% if post.hero_image %} post-card--has-image{% endif %}" tabindex="0">
+  {% if post.hero_image %}
+  <a href="{{ post.url | relative_url }}" class="post-card-image" tabindex="-1" aria-hidden="true">
+    <img src="{{ post.hero_image | relative_url }}" alt="" loading="lazy" width="600" height="240">
+  </a>
+  {% endif %}
+  <div class="post-card-body">
   <div class="post-card-top">
     {% if post.tags.size > 0 %}
     <div class="post-tags" aria-label="Tags">
@@ -27,5 +33,6 @@
       {% assign minutes = words | divided_by: 200 %}
       {% if minutes < 1 %}1{% else %}{{ minutes }}{% endif %} min read
     </span>
+  </div>
   </div>
 </article>

@@ -1,5 +1,61 @@
 ﻿// =============================================================================
-// HERO SECTION
+// SITE INTRO — compact article-first homepage banner (replaces full hero)
+// =============================================================================
+
+.site-intro {
+  position: relative;
+  overflow: hidden;
+  padding: $sp-12 0 $sp-12;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+
+  // Reuse the same dot-grid bg as the old hero (class .hero-bg is shared)
+  .hero-bg { opacity: 0.6; }
+
+  @media (max-width: 640px) { padding: $sp-8 0; }
+}
+
+.site-intro-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $sp-4;
+}
+
+.site-intro-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border-acc);
+  border-radius: 999px;
+  padding: $sp-2 $sp-4;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+}
+
+.site-intro-title {
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  color: var(--text);
+  margin: 0;
+}
+
+.site-intro-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0;
+}
+
+// =============================================================================
+// HERO SECTION (kept for potential future use — not used on homepage)
 // =============================================================================
 
 .hero {
