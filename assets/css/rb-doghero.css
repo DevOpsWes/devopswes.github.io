@@ -1,0 +1,71 @@
+/* =============================================================================
+   rb-doghero.css — Namespaced styles for the robot × dog header animation.
+   All rules are scoped under .rb-doghero. No global element selectors.
+   ============================================================================= */
+
+/* ── Wrapper (around the <h1>) ──────────────────────────────────────────────── */
+.rb-doghero {
+  position: relative;
+  display: block;
+}
+
+/* ── Invisible animation stage — extends beyond the h1 in all directions ────── */
+.rb-doghero-stage {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+  /* top/left/right/bottom are set dynamically by JS based on measured geometry */
+}
+
+/* ── Character containers ────────────────────────────────────────────────────── */
+.rb-doghero-robot,
+.rb-doghero-dog,
+.rb-doghero-bone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 0; /* prevent ghost whitespace below inline SVG */
+}
+
+/* Bone rotates around its own visual center */
+.rb-doghero-bone {
+  transform-origin: center;
+}
+
+/* ── SVG child element transforms ────────────────────────────────────────────── */
+
+/* Robot throwing arm — pivots at the top-center of the arm group (shoulder) */
+.rb-doghero-robot .rb-robot-arm {
+  transform-box: fill-box;
+  transform-origin: top center;
+}
+
+/* Dog tail — pivots at its base (bottom-left of the path bounding box) */
+.rb-doghero-dog .rb-dog-tail {
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+}
+
+/* Dog legs — pivot at the top-center (hip joints) */
+.rb-doghero-dog .rb-dog-frontlegs,
+.rb-doghero-dog .rb-dog-backlegs {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+
+/* ── Hide entire stage on very narrow viewports ──────────────────────────────── */
+@media (max-width: 640px) {
+  .rb-doghero-stage {
+    display: none;
+  }
+}
+
+/* ── Debug mode: outline everything ─────────────────────────────────────────── */
+.rb-doghero--debug .rb-doghero-stage {
+  outline: 2px dashed rgba(255, 80, 80, 0.5);
+}
+.rb-doghero--debug .rb-doghero-robot,
+.rb-doghero--debug .rb-doghero-dog,
+.rb-doghero--debug .rb-doghero-bone {
+  outline: 1px dashed rgba(80, 255, 80, 0.6);
+}

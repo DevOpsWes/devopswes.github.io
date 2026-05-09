@@ -4,42 +4,16 @@
 
 .site-intro {
   position: relative;
-  overflow: hidden;
+  overflow: visible;          // allow animation stage to extend above/below section
+  padding: $sp-12 0 $sp-16;  // explicit padding now that SVG no longer sets height
   border-bottom: 1px solid var(--border);
 
   .hero-bg { opacity: 0.6; }
 }
 
-// Full-width SVG scene — its aspect ratio (1000×300) drives the section height
-.scene-wrap {
-  position: relative;
-  z-index: 0;
-
-  @media (max-width: 640px) { display: none; }
-}
-
-.scene-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-// Title text is absolutely centred over the scene on desktop,
-// falls back to normal block flow on mobile (scene is hidden)
 .site-intro-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  pointer-events: none;
-
-  @media (max-width: 640px) {
-    position: static;
-    padding: $sp-8 0;
-    pointer-events: auto;
-  }
+  position: relative;
+  z-index: 1;
 }
 
 .site-intro-center {
@@ -48,28 +22,9 @@
   align-items: center;
   gap: $sp-4;
   text-align: center;
-  pointer-events: auto;
-  max-width: 480px;
-  // Frosted glass backdrop so text reads clearly over the animated SVG
-  background: rgba(8, 12, 20, 0.58);
-  border: 1px solid rgba(245, 158, 11, 0.12);
-  border-radius: $sp-4;
-  padding: $sp-4 $sp-6;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  [data-theme="light"] & {
-    background: rgba(255, 255, 255, 0.82);
-    border-color: rgba(0, 0, 0, 0.08);
-  }
-
-  @media (max-width: 640px) {
-    background: none;
-    border: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    padding: 0 $sp-4;
-  }
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 $sp-4;
 }
 
 .site-intro-badge {

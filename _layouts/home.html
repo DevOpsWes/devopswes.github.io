@@ -5,20 +5,18 @@ layout: default
 <section class="site-intro" aria-label="Site introduction">
   <div class="hero-bg" aria-hidden="true"></div>
 
-  <!-- Full-width animated scene — robot throws bone, dog fetches, loops forever -->
-  <div class="scene-wrap" aria-hidden="true">
-    <img src="{{ '/assets/images/scene-animation.svg' | relative_url }}"
-         class="scene-img" alt="">
-  </div>
-
-  <!-- Title text centred over the scene (stacks below on mobile) -->
   <div class="site-intro-overlay">
     <div class="container">
       <div class="site-intro-center">
         <div class="site-intro-badge">🚀 AI &middot; DevOps &middot; Cloud &middot; Automation &middot; Virtual Desktop Environments</div>
-        <h1 class="site-intro-title">
-          Your <span class="gradient-text">Signal</span> in the <span class="gradient-text">AI Noise</span>.
-        </h1>
+
+        <!-- .rb-doghero wraps only the h1 — JS injects the animation stage here -->
+        <div class="rb-doghero">
+          <h1 id="page-title" class="site-intro-title">
+            Your <span class="gradient-text">Signal</span> in the <span class="gradient-text">AI Noise</span>.
+          </h1>
+        </div>
+
         <p class="site-intro-desc">
           Practical insights from a DevOps engineer navigating AI's transformation of infrastructure, tooling, and the job itself.
         </p>
