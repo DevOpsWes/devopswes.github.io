@@ -111,289 +111,154 @@
   // ─── SVG ART: ROBOT ────────────────────────────────────────────────────────
   // viewBox 0 0 80 112  |  facing RIGHT  |  arm pivot = top-center of arm group
   function buildRobot() {
-    // Hardcoded visible colours — amber body guaranteed visible on #080c14 bg
-    var BODY  = '#f59e0b';   // amber body (brand colour)
-    var DARK  = '#080c14';   // dark outlines and sockets
-    var EYE   = '#10b981';   // green iris — bright contrast against both amber and dark
-    var WHITE = '#ffffff';   // glints
-    var gId   = 'rbr-g';
-    var svg   = svgEl('svg', { viewBox:'0 0 80 112', xmlns:NS,
-                               style:'overflow:visible;display:block' });
-    var defs  = svgEl('defs', {});
-    append(defs, glowFilterDef(gId));
-    svg.appendChild(defs);
-    var gf = 'url(#' + gId + ')';
-
-    // Antenna
-    append(svg,
-      svgEl('line',   { x1:'40', y1:'2',  x2:'40', y2:'11',
-                        stroke:DARK, 'stroke-width':'2', 'stroke-linecap':'round' }),
-      svgEl('circle', { cx:'40', cy:'2', r:'5',
-                        fill:EYE, filter:gf, opacity:'1' })
-    );
-
-    // Head
-    svg.appendChild(svgEl('rect', { x:'16', y:'8', width:'48', height:'38', rx:'10',
-      fill:BODY, stroke:DARK, 'stroke-width':'2' }));
-
-    // Left eye socket + iris + glint
-    append(svg,
-      svgEl('rect',   { x:'19', y:'14', width:'18', height:'12', rx:'5', fill:DARK }),
-      svgEl('circle', { cx:'28', cy:'20', r:'5.5', fill:EYE, filter:gf }),
-      svgEl('circle', { cx:'31', cy:'17', r:'2',   fill:WHITE })
-    );
-
-    // Right eye socket + iris + glint
-    append(svg,
-      svgEl('rect',   { x:'43', y:'14', width:'18', height:'12', rx:'5', fill:DARK }),
-      svgEl('circle', { cx:'52', cy:'20', r:'5.5', fill:EYE, filter:gf }),
-      svgEl('circle', { cx:'55', cy:'17', r:'2',   fill:WHITE })
-    );
-
-    // Wink — rect covers right eye; toggled via opacity in JS
-    var wink = svgEl('rect', { x:'43', y:'13', width:'18', height:'14', rx:'5',
-                               fill:BODY, opacity:'0', class:'rb-robot-wink' });
-    svg.appendChild(wink);
-
-    // Smile
-    svg.appendChild(svgEl('path', {
-      d:'M 26 36 Q 40 43 54 36',
-      stroke:DARK, 'stroke-width':'2', 'stroke-linecap':'round', fill:'none'
-    }));
-
-    // Neck
-    svg.appendChild(svgEl('rect', { x:'30', y:'46', width:'20', height:'8', rx:'4',
-      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }));
-
-    // Body
-    svg.appendChild(svgEl('rect', { x:'13', y:'52', width:'54', height:'42', rx:'8',
-      fill:BODY, stroke:DARK, 'stroke-width':'2' }));
-
-    // Chest panel
-    append(svg,
-      svgEl('rect', { x:'23', y:'64', width:'34', height:'5', rx:'2.5',
-                      fill:DARK, opacity:'0.3' }),
-      svgEl('rect', { x:'23', y:'64', width:'21', height:'5', rx:'2.5',
-                      fill:EYE, opacity:'0.9' })
-    );
-
-    // LEDs
-    append(svg,
-      svgEl('circle', { cx:'26', cy:'79', r:'3.5', fill:EYE,   filter:gf }),
-      svgEl('circle', { cx:'38', cy:'79', r:'3.5', fill:WHITE, filter:gf, opacity:'0.8' })
-    );
-
-    // Left arm (static)
-    append(svg,
-      svgEl('rect',   { x:'3',  y:'54', width:'12', height:'28', rx:'6',
-                        fill:BODY, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('circle', { cx:'9', cy:'86', r:'7',
-                        fill:BODY, stroke:DARK, 'stroke-width':'1.5' })
-    );
-
-    // RIGHT (throwing) arm
-    var arm = svgEl('g', { class:'rb-robot-arm' });
-    append(arm,
-      svgEl('rect',   { x:'61', y:'56', width:'12', height:'24', rx:'6',
-                        fill:BODY, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('rect',   { x:'63', y:'78', width:'10', height:'18', rx:'5',
-                        fill:BODY, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('circle', { cx:'68', cy:'98', r:'7',
-                        fill:BODY, stroke:DARK, 'stroke-width':'1.5' })
-    );
-    svg.appendChild(arm);
-
-    // Legs
-    append(svg,
-      svgEl('rect', { x:'23', y:'92', width:'14', height:'16', rx:'6',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('rect', { x:'43', y:'92', width:'14', height:'16', rx:'6',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' })
-    );
-
-    // Feet
-    append(svg,
-      svgEl('rect', { x:'18', y:'105', width:'22', height:'7', rx:'3.5',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('rect', { x:'40', y:'105', width:'22', height:'7', rx:'3.5',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' })
-    );
-
-    return { svg:svg, arm:arm, wink:wink };
+    // innerHTML approach: browser HTML parser handles SVG namespace — guaranteed render
+    var wrap = document.createElement('div');
+    wrap.innerHTML = '<svg viewBox="0 0 80 112" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;display:block">'
+      + '<defs><filter id="rbr-g" x="-60%" y="-60%" width="220%" height="220%">'
+      + '<feGaussianBlur stdDeviation="2.2" result="bl"/>'
+      + '<feMerge><feMergeNode in="bl"/><feMergeNode in="SourceGraphic"/></feMerge>'
+      + '</filter></defs>'
+      // Antenna
+      + '<line x1="40" y1="2" x2="40" y2="11" stroke="#080c14" stroke-width="2" stroke-linecap="round"/>'
+      + '<circle cx="40" cy="2" r="5" fill="#10b981" filter="url(#rbr-g)"/>'
+      // Head
+      + '<rect x="16" y="8" width="48" height="38" rx="10" fill="#f59e0b" stroke="#080c14" stroke-width="2"/>'
+      // Left eye
+      + '<rect x="19" y="14" width="18" height="12" rx="5" fill="#080c14"/>'
+      + '<circle cx="28" cy="20" r="5.5" fill="#10b981" filter="url(#rbr-g)"/>'
+      + '<circle cx="31" cy="17" r="2" fill="#ffffff"/>'
+      // Right eye
+      + '<rect x="43" y="14" width="18" height="12" rx="5" fill="#080c14"/>'
+      + '<circle cx="52" cy="20" r="5.5" fill="#10b981" filter="url(#rbr-g)"/>'
+      + '<circle cx="55" cy="17" r="2" fill="#ffffff"/>'
+      // Wink
+      + '<rect class="rb-robot-wink" x="43" y="13" width="18" height="14" rx="5" fill="#f59e0b" opacity="0"/>'
+      // Smile
+      + '<path d="M 26 36 Q 40 43 54 36" stroke="#080c14" stroke-width="2" stroke-linecap="round" fill="none"/>'
+      // Neck
+      + '<rect x="30" y="46" width="20" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      // Body
+      + '<rect x="13" y="52" width="54" height="42" rx="8" fill="#f59e0b" stroke="#080c14" stroke-width="2"/>'
+      // Chest panel
+      + '<rect x="23" y="64" width="34" height="5" rx="2.5" fill="#080c14" opacity="0.3"/>'
+      + '<rect x="23" y="64" width="21" height="5" rx="2.5" fill="#10b981" opacity="0.9"/>'
+      // LEDs
+      + '<circle cx="26" cy="79" r="3.5" fill="#10b981" filter="url(#rbr-g)"/>'
+      + '<circle cx="38" cy="79" r="3.5" fill="#ffffff" filter="url(#rbr-g)" opacity="0.8"/>'
+      // Left arm (static)
+      + '<rect x="3" y="54" width="12" height="28" rx="6" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<circle cx="9" cy="86" r="7" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      // Right throwing arm (animated)
+      + '<g class="rb-robot-arm">'
+      + '<rect x="61" y="56" width="12" height="24" rx="6" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="63" y="78" width="10" height="18" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<circle cx="68" cy="98" r="7" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '</g>'
+      // Legs
+      + '<rect x="23" y="92" width="14" height="16" rx="6" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="43" y="92" width="14" height="16" rx="6" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      // Feet
+      + '<rect x="18" y="105" width="22" height="7" rx="3.5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="40" y="105" width="22" height="7" rx="3.5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '</svg>';
+    var svg = wrap.firstElementChild;
+    return { svg:svg, arm:svg.querySelector('.rb-robot-arm'), wink:svg.querySelector('.rb-robot-wink') };
   }
+
   // ─── SVG ART: DOG ──────────────────────────────────────────────────────────
   // viewBox 0 0 78 88  |  facing LEFT (snout at low-x, tail at high-x)
   function buildDog() {
-    var BODY   = '#f59e0b';   // amber body
-    var DARK   = '#080c14';   // dark outlines
-    var EYE    = '#10b981';   // green iris
-    var WHITE  = '#ffffff';   // glints
-    var ORANGE = '#fb923c';   // tongue
-    var BONE   = '#f0f0f0';   // carry-bone colour
-    var gId    = 'rbd-g';
-    var svg    = svgEl('svg', { viewBox:'0 0 78 88', xmlns:NS,
-                                style:'overflow:visible;display:block' });
-    var defs   = svgEl('defs', {});
-    append(defs, glowFilterDef(gId));
-    svg.appendChild(defs);
-    var gf = 'url(#' + gId + ')';
-
-    // Snout
-    svg.appendChild(svgEl('rect', { x:'0', y:'24', width:'24', height:'16', rx:'7',
-      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }));
-
-    // Nose
-    svg.appendChild(svgEl('circle', { cx:'3', cy:'32', r:'3.5',
-      fill:DARK }));
-
-    // Mouth
-    svg.appendChild(svgEl('path', {
-      d:'M 4 38 Q 12 44 22 38',
-      stroke:DARK, 'stroke-width':'1.8', 'stroke-linecap':'round', fill:'none'
-    }));
-
-    // Tongue (visible during CATCH)
-    var tongue = svgEl('path', {
-      d:'M 5 40 Q 12 50 21 40',
-      stroke:ORANGE, 'stroke-width':'3.5', 'stroke-linecap':'round',
-      fill:'none', opacity:'0', class:'rb-dog-tongue'
-    });
-    svg.appendChild(tongue);
-
-    // Head
-    svg.appendChild(svgEl('rect', { x:'16', y:'10', width:'38', height:'32', rx:'9',
-      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }));
-
-    // Ears
-    append(svg,
-      svgEl('rect', { x:'20', y:'1',  width:'10', height:'14', rx:'5',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5',
-                      transform:'rotate(-9,25,8)' }),
-      svgEl('rect', { x:'36', y:'1',  width:'10', height:'14', rx:'5',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5',
-                      transform:'rotate(9,41,8)' })
-    );
-
-    // Eyebrows
-    append(svg,
-      svgEl('path', { d:'M 19 12 Q 26 7 33 12',
-                      stroke:DARK, 'stroke-width':'2', 'stroke-linecap':'round', fill:'none' }),
-      svgEl('path', { d:'M 35 12 Q 42 7 49 12',
-                      stroke:DARK, 'stroke-width':'2', 'stroke-linecap':'round', fill:'none' })
-    );
-
-    // Left eye socket + iris + glint
-    append(svg,
-      svgEl('rect',   { x:'19', y:'16', width:'14', height:'11', rx:'4', fill:DARK }),
-      svgEl('circle', { cx:'23', cy:'21', r:'4.5', fill:EYE, filter:gf }),
-      svgEl('circle', { cx:'25', cy:'18', r:'1.5', fill:WHITE })
-    );
-
-    // Right eye socket + iris + glint
-    append(svg,
-      svgEl('rect',   { x:'35', y:'16', width:'14', height:'11', rx:'4', fill:DARK }),
-      svgEl('circle', { cx:'39', cy:'21', r:'4.5', fill:EYE, filter:gf }),
-      svgEl('circle', { cx:'41', cy:'18', r:'1.5', fill:WHITE })
-    );
-
-    // Neck
-    svg.appendChild(svgEl('rect', { x:'50', y:'30', width:'10', height:'12', rx:'4',
-      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }));
-
-    // Body
-    svg.appendChild(svgEl('rect', { x:'46', y:'40', width:'28', height:'28', rx:'8',
-      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }));
-
-    // Chest panel
-    append(svg,
-      svgEl('rect', { x:'51', y:'50', width:'18', height:'4', rx:'2',
-                      fill:DARK, opacity:'0.3' }),
-      svgEl('rect', { x:'51', y:'50', width:'11', height:'4', rx:'2',
-                      fill:EYE, opacity:'0.9' }),
-      svgEl('circle', { cx:'53', cy:'62', r:'2.5',
-                        fill:EYE, filter:gf })
-    );
-
-    // Tail
-    var tail = svgEl('g', { class:'rb-dog-tail' });
-    append(tail,
-      svgEl('path', {
-        d:'M 72 46 C 80 36 88 26 82 16',
-        stroke:BODY, 'stroke-width':'6', 'stroke-linecap':'round', fill:'none'
-      }),
-      svgEl('path', {
-        d:'M 72 46 C 80 36 88 26 82 16',
-        stroke:DARK, 'stroke-width':'1.5', 'stroke-linecap':'round',
-        fill:'none', opacity:'0.5'
-      })
-    );
-    svg.appendChild(tail);
-
-    // Front legs
-    var fl = svgEl('g', { class:'rb-dog-frontlegs' });
-    append(fl,
-      svgEl('rect', { x:'22', y:'60', width:'10', height:'22', rx:'5',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('rect', { x:'34', y:'60', width:'10', height:'22', rx:'5',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' })
-    );
-    svg.appendChild(fl);
-
-    // Back legs
-    var bl = svgEl('g', { class:'rb-dog-backlegs' });
-    append(bl,
-      svgEl('rect', { x:'50', y:'66', width:'10', height:'16', rx:'5',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('rect', { x:'62', y:'66', width:'10', height:'16', rx:'5',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' })
-    );
-    svg.appendChild(bl);
-
-    // Feet
-    append(svg,
-      svgEl('rect', { x:'16', y:'78', width:'18', height:'8', rx:'4',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('rect', { x:'28', y:'78', width:'18', height:'8', rx:'4',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('rect', { x:'44', y:'78', width:'18', height:'8', rx:'4',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('rect', { x:'56', y:'78', width:'18', height:'8', rx:'4',
-                      fill:BODY, stroke:DARK, 'stroke-width':'1.5' })
-    );
-
-    // Carry-bone (off-white so it's visible on dark background during return run)
-    var cb = svgEl('g', { class:'rb-carry-bone', opacity:'0' });
-    append(cb,
-      svgEl('rect',   { x:'5',  y:'29', width:'16', height:'6', rx:'3',
-                        fill:BONE, stroke:DARK, 'stroke-width':'1.2' }),
-      svgEl('circle', { cx:'5',  cy:'30', r:'3.5', fill:BONE, stroke:DARK, 'stroke-width':'1.2' }),
-      svgEl('circle', { cx:'5',  cy:'35', r:'3.5', fill:BONE, stroke:DARK, 'stroke-width':'1.2' }),
-      svgEl('circle', { cx:'21', cy:'30', r:'3.5', fill:BONE, stroke:DARK, 'stroke-width':'1.2' }),
-      svgEl('circle', { cx:'21', cy:'35', r:'3.5', fill:BONE, stroke:DARK, 'stroke-width':'1.2' })
-    );
-    svg.appendChild(cb);
-
-    return { svg:svg, tail:tail, fl:fl, bl:bl, tongue:tongue, carryBone:cb };
+    var wrap = document.createElement('div');
+    wrap.innerHTML = '<svg viewBox="0 0 78 88" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;display:block">'
+      + '<defs><filter id="rbd-g" x="-60%" y="-60%" width="220%" height="220%">'
+      + '<feGaussianBlur stdDeviation="2.2" result="bl"/>'
+      + '<feMerge><feMergeNode in="bl"/><feMergeNode in="SourceGraphic"/></feMerge>'
+      + '</filter></defs>'
+      // Snout
+      + '<rect x="0" y="24" width="24" height="16" rx="7" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      // Nose
+      + '<circle cx="3" cy="32" r="3.5" fill="#080c14"/>'
+      // Mouth
+      + '<path d="M 4 38 Q 12 44 22 38" stroke="#080c14" stroke-width="1.8" stroke-linecap="round" fill="none"/>'
+      // Tongue
+      + '<path class="rb-dog-tongue" d="M 5 40 Q 12 50 21 40" stroke="#fb923c" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0"/>'
+      // Head
+      + '<rect x="16" y="10" width="38" height="32" rx="9" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      // Ears
+      + '<rect x="20" y="1" width="10" height="14" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5" transform="rotate(-9,25,8)"/>'
+      + '<rect x="36" y="1" width="10" height="14" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5" transform="rotate(9,41,8)"/>'
+      // Eyebrows
+      + '<path d="M 19 12 Q 26 7 33 12" stroke="#080c14" stroke-width="2" stroke-linecap="round" fill="none"/>'
+      + '<path d="M 35 12 Q 42 7 49 12" stroke="#080c14" stroke-width="2" stroke-linecap="round" fill="none"/>'
+      // Left eye
+      + '<rect x="19" y="16" width="14" height="11" rx="4" fill="#080c14"/>'
+      + '<circle cx="23" cy="21" r="4.5" fill="#10b981" filter="url(#rbd-g)"/>'
+      + '<circle cx="25" cy="18" r="1.5" fill="#ffffff"/>'
+      // Right eye
+      + '<rect x="35" y="16" width="14" height="11" rx="4" fill="#080c14"/>'
+      + '<circle cx="39" cy="21" r="4.5" fill="#10b981" filter="url(#rbd-g)"/>'
+      + '<circle cx="41" cy="18" r="1.5" fill="#ffffff"/>'
+      // Neck
+      + '<rect x="50" y="30" width="10" height="12" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      // Body
+      + '<rect x="46" y="40" width="28" height="28" rx="8" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      // Chest panel
+      + '<rect x="51" y="50" width="18" height="4" rx="2" fill="#080c14" opacity="0.3"/>'
+      + '<rect x="51" y="50" width="11" height="4" rx="2" fill="#10b981" opacity="0.9"/>'
+      + '<circle cx="53" cy="62" r="2.5" fill="#10b981" filter="url(#rbd-g)"/>'
+      // Tail
+      + '<g class="rb-dog-tail">'
+      + '<path d="M 72 46 C 80 36 88 26 82 16" stroke="#f59e0b" stroke-width="6" stroke-linecap="round" fill="none"/>'
+      + '<path d="M 72 46 C 80 36 88 26 82 16" stroke="#080c14" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>'
+      + '</g>'
+      // Front legs
+      + '<g class="rb-dog-frontlegs">'
+      + '<rect x="22" y="60" width="10" height="22" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="34" y="60" width="10" height="22" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '</g>'
+      // Back legs
+      + '<g class="rb-dog-backlegs">'
+      + '<rect x="50" y="66" width="10" height="16" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="62" y="66" width="10" height="16" rx="5" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '</g>'
+      // Feet
+      + '<rect x="16" y="78" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="28" y="78" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="44" y="78" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="56" y="78" width="18" height="8" rx="4" fill="#f59e0b" stroke="#080c14" stroke-width="1.5"/>'
+      // Carry-bone (off-white, visible on dark background)
+      + '<g class="rb-carry-bone" opacity="0">'
+      + '<rect x="5" y="29" width="16" height="6" rx="3" fill="#f0f0f0" stroke="#080c14" stroke-width="1.2"/>'
+      + '<circle cx="5" cy="30" r="3.5" fill="#f0f0f0" stroke="#080c14" stroke-width="1.2"/>'
+      + '<circle cx="5" cy="35" r="3.5" fill="#f0f0f0" stroke="#080c14" stroke-width="1.2"/>'
+      + '<circle cx="21" cy="30" r="3.5" fill="#f0f0f0" stroke="#080c14" stroke-width="1.2"/>'
+      + '<circle cx="21" cy="35" r="3.5" fill="#f0f0f0" stroke="#080c14" stroke-width="1.2"/>'
+      + '</g>'
+      + '</svg>';
+    var svg = wrap.firstElementChild;
+    return {
+      svg:svg,
+      tail:svg.querySelector('.rb-dog-tail'),
+      fl:svg.querySelector('.rb-dog-frontlegs'),
+      bl:svg.querySelector('.rb-dog-backlegs'),
+      tongue:svg.querySelector('.rb-dog-tongue'),
+      carryBone:svg.querySelector('.rb-carry-bone')
+    };
   }
+
   // ─── SVG ART: BONE ─────────────────────────────────────────────────────────
   // viewBox 0 0 44 20  |  classic bone icon centred at (22, 10)
   function buildBone() {
-    var BONE  = '#f0f0f0';   // off-white — clearly visible on dark background
-    var DARK  = '#080c14';   // dark stroke
-    var WHITE = '#ffffff';
-    var svg = svgEl('svg', { viewBox:'0 0 44 20', xmlns:NS,
-                              style:'overflow:visible;display:block' });
-    append(svg,
-      svgEl('rect',   { x:'9',  y:'7',  width:'26', height:'6', rx:'3',
-                        fill:BONE, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('circle', { cx:'9',  cy:'8',  r:'5', fill:BONE, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('circle', { cx:'9',  cy:'13', r:'5', fill:BONE, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('circle', { cx:'35', cy:'8',  r:'5', fill:BONE, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('circle', { cx:'35', cy:'13', r:'5', fill:BONE, stroke:DARK, 'stroke-width':'1.5' }),
-      svgEl('rect',   { x:'14', y:'8', width:'10', height:'2.5', rx:'1.2',
-                        fill:WHITE, opacity:'0.4' })
-    );
-    return svg;
+    var wrap = document.createElement('div');
+    wrap.innerHTML = '<svg viewBox="0 0 44 20" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;display:block">'
+      + '<rect x="9" y="7" width="26" height="6" rx="3" fill="#f0f0f0" stroke="#080c14" stroke-width="1.5"/>'
+      + '<circle cx="9" cy="8" r="5" fill="#f0f0f0" stroke="#080c14" stroke-width="1.5"/>'
+      + '<circle cx="9" cy="13" r="5" fill="#f0f0f0" stroke="#080c14" stroke-width="1.5"/>'
+      + '<circle cx="35" cy="8" r="5" fill="#f0f0f0" stroke="#080c14" stroke-width="1.5"/>'
+      + '<circle cx="35" cy="13" r="5" fill="#f0f0f0" stroke="#080c14" stroke-width="1.5"/>'
+      + '<rect x="14" y="8" width="10" height="2.5" rx="1.2" fill="#ffffff" opacity="0.4"/>'
+      + '</svg>';
+    return wrap.firstElementChild;
   }
   // ─── ANIMATION HELPERS ─────────────────────────────────────────────────────
   function wait(ms) {
